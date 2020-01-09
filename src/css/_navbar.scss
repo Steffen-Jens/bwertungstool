@@ -1,0 +1,101 @@
+.navbar {
+  z-index: 1;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  background: $primaryColor;
+  border-bottom-width: $barBorderWidth;
+  border-bottom-style: $barBorderStyle;
+  border-bottom-color: $fontColor;
+  border-top-color: $highlightColor;
+  border-top-style: $barBorderStyle;
+  border-top-width: $barBorderWidth;
+
+
+
+  .navbar-brand {
+    .logo {
+      height: $logoHeight;
+    }
+  }
+
+  .categ{
+    float: right;
+  }
+
+  .nav-search {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+  }
+
+  .navbar-nav {
+    margin-right: 0px;
+    width: 100%-$contentMargin;
+
+
+
+    .search-list {
+      width: 100%;
+
+      .nav-search {
+        width: 100%;
+
+        .searchfield {
+          width: 74%;
+        }
+      }
+    }
+
+  }
+
+  @media (min-width: $mediaMinWidth) {
+    .nav-right {
+      float: right;
+      padding-right: 0px;
+
+      .nav-link:hover {
+        .icon:before {
+          transition: $sidenavTransition;
+          color: $highlightColor;
+        }
+      }
+    }
+  }
+
+  @media(max-width: $mediaMaxWidth) {
+    .navbar-nav {
+
+      .search-list{
+        display: none;
+      }
+
+      .fa-plus::before {
+        padding-right: 7.8px;
+      }
+
+      .fa-user::before {
+        padding-right: 7.7px;
+      }
+
+      .fa-users::before {
+        padding-right: 0px;
+      }
+    }
+  }
+
+  .nav-span {
+    color: $fontColor;
+    padding-left: 5px;
+  }
+
+
+  .button-list {
+    float: right;
+  }
+
+
+}

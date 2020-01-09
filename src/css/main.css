@@ -1,0 +1,133 @@
+html {
+  height: 100%; }
+  html body {
+    margin: 0 0 0 0;
+    color: black;
+    background: #d3d3d3;
+    height: 100%; }
+    @media (min-width: 991px) {
+      html body .mob-hide {
+        display: none; } }
+    html body #app {
+      height: 100%; }
+      html body #app header .navbar {
+        z-index: 1;
+        top: 0;
+        position: fixed;
+        width: 100%;
+        background: white;
+        border-bottom-width: 2px;
+        border-bottom-style: solid;
+        border-bottom-color: black;
+        border-top-color: #ff6417;
+        border-top-style: solid;
+        border-top-width: 2px; }
+        html body #app header .navbar .navbar-brand .logo {
+          height: 50px; }
+        html body #app header .navbar .categ {
+          float: right; }
+        html body #app header .navbar .nav-search {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center; }
+        html body #app header .navbar .navbar-nav {
+          margin-right: 0px;
+          width: 98%; }
+          html body #app header .navbar .navbar-nav .search-list {
+            width: 100%; }
+            html body #app header .navbar .navbar-nav .search-list .nav-search {
+              width: 100%; }
+              html body #app header .navbar .navbar-nav .search-list .nav-search .searchfield {
+                width: 74%; }
+        @media (min-width: 992px) {
+          html body #app header .navbar .nav-right {
+            float: right;
+            padding-right: 0px; }
+            html body #app header .navbar .nav-right .nav-link:hover .icon:before {
+              transition: 0.5s;
+              color: #ff6417; } }
+        @media (max-width: 991px) {
+          html body #app header .navbar .navbar-nav .search-list {
+            display: none; }
+          html body #app header .navbar .navbar-nav .fa-plus::before {
+            padding-right: 7.8px; }
+          html body #app header .navbar .navbar-nav .fa-user::before {
+            padding-right: 7.7px; }
+          html body #app header .navbar .navbar-nav .fa-users::before {
+            padding-right: 0px; } }
+        html body #app header .navbar .nav-span {
+          color: black;
+          padding-left: 5px; }
+        html body #app header .navbar .button-list {
+          float: right; }
+      html body #app .sidebar {
+        padding-top: 0;
+        height: 100%;
+        z-index: 1;
+        width: 0;
+        margin-top: 83.6px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-x: hidden;
+        transition: 0.5s;
+        background-color: white;
+        box-shadow: 2px 5px;
+        border-top-style: solid;
+        border-top-color: black;
+        border-top-width: 2px; }
+        html body #app .sidebar .sidebar-content {
+          margin-left: 2%; }
+          html body #app .sidebar .sidebar-content .sidenav-search .searchfield {
+            width: 80%; }
+        html body #app .sidebar .sidebar-button {
+          padding-top: 0; }
+        html body #app .sidebar .close-btn {
+          float: right; }
+      html body #app .btn {
+        border-color: #ff6417;
+        border-width: 2px;
+        transition: 0.5s; }
+      html body #app .btn:hover {
+        color: white;
+        background-color: #ff6417;
+        border-color: black;
+        transition: ease-out 0.5s; }
+      html body #app .icnbtn {
+        border: none;
+        background-color: transparent;
+        outline: none; }
+      html body #app .icnbtn:focus {
+        box-shadow: none; }
+      html body #app .icon::before {
+        color: black; }
+      html body #app .adm-button {
+        display: none; }
+      html body #app .icnbtn:hover .icon:before {
+        transition: 0.5s;
+        color: #ff6417; }
+      html body #app .mainComponent {
+        background: white;
+        min-height: 100%;
+        transition: 0.5s;
+        width: 100%;
+        padding-top: 83.5px;
+        padding-left: 15px;
+        padding-right: 15px; }
+        html body #app .mainComponent .user-account .login {
+          border-right-color: black;
+          border-right-style: solid;
+          border-right-width: 2px; }
+        html body #app .mainComponent .user-account input[type='text'], html body #app .mainComponent .user-account input[type='password'], html body #app .mainComponent .user-account input[type='email'] {
+          width: 100%;
+          margin-bottom: 10px;
+          border-color: black;
+          border-width: 2px;
+          outline: none;
+          padding-left: 1px; }
+        html body #app .mainComponent .user-account input:focus {
+          border-width: 3px;
+          outline: none; }
+
+/*# sourceMappingURL=main.css.map */

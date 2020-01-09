@@ -1,28 +1,38 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <appNavbar :mainComponent="mainComponent" @changeMC="mainComponent=$event"/>
+    <component id="mainComponent" class="mainComponent" :is="mainComponent"></component>
+    <appSidebar/>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Navbar from './components/Navbar.vue';
+import Home from './components/Home.vue';
+import Sidebar from './components/Sidebar.vue';
+import Login from './components/Login.vue';
+
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    appNavbar: Navbar,
+    appHome: Home,
+    appSidebar: Sidebar,
+    appLogin: Login,
+
+  },
+  data: function(){
+    return{
+      mainComponent: "appHome"
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style type="scss">
+
+@import "css/main.css";
+
 </style>

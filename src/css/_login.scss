@@ -1,0 +1,31 @@
+
+.user-account{
+
+  .login{
+    border-right-color: $fontColor;
+    border-right-style: $barBorderStyle;
+    border-right-width: $barBorderWidth;
+  }
+
+  input[type='text']{
+    width:100%;
+    margin-bottom: 10px;
+    border-color: $fontColor;
+    border-width: $barBorderWidth;
+    outline: none;
+    padding-left: 1px;
+  }
+
+  input[type='password']{
+    @extend input[type='text'];
+  }
+
+  input[type='email']{
+    @extend input[type='text'];
+  }
+
+  input:focus{
+    border-width: $barBorderWidth+1px;
+    outline: none;
+  }
+}
