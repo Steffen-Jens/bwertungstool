@@ -1,7 +1,7 @@
 <template>
   <header>
     <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="index.php"><img class="logo" src="../assets/logo.png"></a>
+      <a class="navbar-brand" @click="newContent='appHome'; setNewcontent()"><img class="logo" src="../assets/logo.png"></a>
       <!-- Navbar brand-->
       <button title="Search" type="button" class="navbar-toggler icnbtn nav-button openbtn"
       @click="openNav()">
