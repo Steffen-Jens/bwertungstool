@@ -2,7 +2,7 @@
   <div id="app">
     <appNavbar :mainComponent="mainComponent" @changeMC="mainComponent=$event"/>
     <component id="mainComponent" class="mainComponent" :is="mainComponent"></component>
-    <appSidebar/>
+    <appSidebar :mainComponent="mainComponent" @changeMC="mainComponent=$event"/>
 
   </div>
 </template>
@@ -12,6 +12,8 @@ import Navbar from './components/Navbar.vue';
 import Home from './components/Home.vue';
 import Sidebar from './components/Sidebar.vue';
 import Login from './components/Login.vue';
+import AddCategory from './components/AddCategory.vue';
+import AddArticle from './components/AddArticle.vue';
 
 
 export default {
@@ -21,6 +23,9 @@ export default {
     appHome: Home,
     appSidebar: Sidebar,
     appLogin: Login,
+    appAddCategory: AddCategory,
+    appAddArticle: AddArticle
+
 
   },
   data: function(){

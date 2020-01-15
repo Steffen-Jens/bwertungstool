@@ -16,7 +16,7 @@
       </form>
       <span class="nav-span">Category
         <button title="Add Category"
-        class="icnbtn sidebar-button ">
+        class="icnbtn sidebar-button " v-if="this.$store.state.isAdmin != null" @click="newContent='appAddCategory'; setNewContent()">
         <a>
           <i class="fas fa-plus icon"></i>
         </a>
@@ -29,15 +29,21 @@
 <script>
 export default {
 
+  data: function(){
+    return {
+      newContent: '',
+      isAdmin: this.$store.state.isAdmin,
+    }
+  },
+
   methods: {
     closeNav() {
-
-        document.getElementById("sidebar").style.width = "0";
-        document.getElementById("mainComponent").style.paddingLeft = "0";
-        document.getElementById("navbarTop").style.paddingLeft = "0";
-        this.expandedNav = false;
-      }
+      this.$store.commit('closeNav')
+    },
+    setNewContent(){
+      this.$emit('changeMC', this.newContent);
     }
+  }
 
 
 

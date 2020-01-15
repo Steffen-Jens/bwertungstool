@@ -12,15 +12,27 @@ export const store = new Vuex.Store({
   state: {
     idToken: null,
     userId: null,
-    username: null
+    username: null,
+    isAdmin: null,
+    categories: []
   },
   mutations: {
     authUser (state, userData) {
       state.idToken = userData.token,
       state.userId = userData.userId
     },
-    setUsername (state, userName){
-      state.username = userName.userName
+    setUser (state, userData){
+      state.username = userData.username
+      state.isAdmin = userData.isAdmin
+    },
+    closeNav(){
+      document.getElementById("sidebar").style.width = "0";
+      document.getElementById("mainComponent").style.paddingLeft = "0";
+      document.getElementById("navbarTop").style.paddingLeft = "0";
+      this.expandedNav = false;
+    },
+    setCategories(state, catData){
+      state.categories.push({categoryName: catData.category})
     }
   },
   actions: {
@@ -44,11 +56,11 @@ export const store = new Vuex.Store({
 
     },
     storeUser({commit, state}, authData){
-      axios.post("/users.json" + '?auth=' + state.idToken, {username: authData.username, email: authData.email})
+      axios.post("/users.json" + '?auth=' + state.idToken, {username: authData.username, email: authData.email, isAdmin: authData.isAdmin/*, someArray: [{message: 'foo', value: 7},{message: 'bar', value: 8}, {message: 'hello', value: 9}]*/})
       .then(res => {
         /* eslint-disable no-console */
         console.log(res)
-        commit('setUsername', authData.username)
+        commit('setUser', authData)
       })
       .catch(error => {
         /* eslint-disable no-console */
@@ -66,6 +78,26 @@ export const store = new Vuex.Store({
           token: res.data.idToken,
           userId: res.data.localId
         })
+        axios.get('/users.json' + '?auth=' + res.data.idToken)
+        .then(res => {
+          /* eslint-disable no-console */
+          console.log("GET METHOD:" + res)
+          const data = res.data
+          for (let key in data){
+            const user = data[key]
+            if (authdata.email == user.email) {
+              commit('setUser', {
+                username: user.username,
+                isAdmin: user.isAdmin
+              })
+            }
+          }
+        })
+
+        .catch(error => {
+          this.error = error,
+          console.log(error)
+        })
       })
       .catch( error =>
         /* eslint-disable no-console */
@@ -73,6 +105,39 @@ export const store = new Vuex.Store({
         /* eslint-enable no-console */
       );
     },
+    createCategory({state}, dbData){
+      axios.post("/category" + dbData.subCategoryOf + ".json" + '?auth=' + state.idToken, {category: dbData.category})
+      .then(res => {
+        /* eslint-disable no-console */
+        console.log(res)
+
+      })
+      .catch(error => {
+        /* eslint-disable no-console */
+        console.log(error)
+      })
+    },
+    getCategories({commit, state}, dbData){
+      axios.get('/category' + dbData.subCategoryOf + '.json' + '?auth=' + state.idToken)
+      .then(res => {
+        /* eslint-disable no-console */
+        console.log("GET METHOD:" + res)
+        const data = res.data
+        for (let key in data){
+          const category = data[key]
+          /* eslint-disable no-console */
+          console.log(category.category),
+            commit('setCategories', {
+              category: category.category
+            })
+        }
+      })
+
+      .catch(error => {
+        this.error = error,
+        console.log(error)
+      })
+    }
   },
   getters: {
 

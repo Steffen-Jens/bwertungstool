@@ -40,7 +40,8 @@ export default{
       regEmail: "",
       regUsername: "",
       regPassword: "",
-      regRepeatPassword: ""
+      regRepeatPassword: "",
+      regIsAdmin: false
     }
   },
   methods: {
@@ -65,7 +66,7 @@ export default{
       returnSecureToken: true
     }
     */
-    this.$store.dispatch('register', {email: this.regEmail, username: this.regUsername, password: sha256(this.regPassword), returnSecureToken: true})
+    this.$store.dispatch('register', {email: this.regEmail, username: this.regUsername, password: sha256(this.regPassword), isAdmin: this.regIsAdmin, returnSecureToken: true})
 
   } else{
     // Error message here
