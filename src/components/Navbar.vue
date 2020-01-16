@@ -85,18 +85,7 @@ export default {
       }
     },
     openNav(){
-
-      var x = window.matchMedia("(max-width: 992px)");
-      if (x.matches) {
-        document.getElementById("sidebar").style.width = "100%";
-        document.getElementById("sidebar").style.marginTop = "78px";
-        document.getElementById("navbarTop").style.transition = "0.5s";
-        document.getElementById("navbarTop").style.paddingLeft = "105%";
-      } else {
-        var margin = "20.5%";
-        document.getElementById("sidebar").style.width = margin;
-        document.getElementById("mainComponent").style.paddingLeft = margin;
-      }
+      this.$store.commit('openNav')
     },
     closeNav(){
       this.$store.commit('closeNav')

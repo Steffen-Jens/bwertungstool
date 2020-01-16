@@ -3,17 +3,16 @@
   height: 100%;
   z-index: 1;
   width: 0;
-  margin-top:83.6px;
+  margin-top:86.6px;
   position: fixed;
   top: 0;
   left: 0;
   overflow-x: hidden;
   transition: $sidenavTransition;
   background-color: $primaryColor;
-  box-shadow: 2px 5px;
-  border-top-style: $barBorderStyle;
-  border-top-color: $fontColor;
-  border-top-width: $barBorderWidth;
+  border-right-style: $barBorderStyle;
+  border-right-color: $borderColor;
+
 
   .sidebar-content{
     margin-left: $contentMargin;
@@ -35,7 +34,3 @@
 
 
 }
-
-
-
-

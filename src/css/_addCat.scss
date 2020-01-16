@@ -1,0 +1,60 @@
+$primary-color: $fontColor;
+$accent-color: $highlightColor;
+
+
+.addCat{
+  .addCatF1{
+    border-right: $barBorderWidth $barBorderStyle $borderColor;
+  }
+  .addCatF2{
+
+    .repeat{
+      position: relative;
+      &:hover > .label {
+        color: $accent-color;
+        &::before {
+          border: 6px solid $accent-color;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .radio-btn {
+      position: absolute;
+      opacity: 0;
+      visibility: hidden;
+      &:checked + .label {
+        color: $accent-color;
+        &::before {
+          margin-right: 15px;
+          border: 6px solid $accent-color;
+          background: $primary-color;
+        }
+      }
+    }
+
+    .label {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0;
+      color: $primary-color;
+      cursor: pointer;
+      transition: all 0.2s linear;
+    }
+
+    .label::before {
+      display: inline-block;
+      content: "";
+      height: 1.125rem;
+      width: 1.125rem;
+      margin-right: 15px;
+      border: $barBorderWidth solid $primary-color;
+      border-radius: 50%;
+      transition: all 0.2s linear;
+    }
+  }
+  .btn{
+    float: right;
+  }
+
+}

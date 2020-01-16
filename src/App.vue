@@ -30,7 +30,7 @@ export default {
   },
   data: function(){
     return{
-      mainComponent: "appHome"
+      mainComponent: "appHome",
     }
   }
 }

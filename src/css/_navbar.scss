@@ -6,7 +6,7 @@
   background: $primaryColor;
   border-bottom-width: $barBorderWidth;
   border-bottom-style: $barBorderStyle;
-  border-bottom-color: $fontColor;
+  border-bottom-color: $borderColor;
   border-top-color: $highlightColor;
   border-top-style: $barBorderStyle;
   border-top-width: $barBorderWidth;
@@ -29,7 +29,6 @@
     align-items: center;
     justify-content: center;
 
-
   }
 
   .navbar-nav {
@@ -46,6 +45,9 @@
 
         .searchfield {
           width: 74%;
+        }
+        .searchfield:focus {
+          outline-color: $highlightColor;
         }
       }
     }

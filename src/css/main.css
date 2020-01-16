@@ -1,3 +1,4 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300";
 html {
   height: 100%; }
   html body {
@@ -9,7 +10,20 @@ html {
       html body .mob-hide {
         display: none; } }
     html body #app {
-      height: 100%; }
+      height: 100%;
+      /*.btn {
+      border-color: $highlightColor;
+      border-width: $barBorderWidth;
+      transition: $hoverTransition;
+    }
+
+    .btn:hover {
+
+    color: white;
+    background-color: $highlightColor;
+    border-color: $borderColor;
+    transition: ease-out $hoverTransition;
+  }*/ }
       html body #app header .navbar {
         z-index: 1;
         top: 0;
@@ -18,7 +32,7 @@ html {
         background: white;
         border-bottom-width: 2px;
         border-bottom-style: solid;
-        border-bottom-color: black;
+        border-bottom-color: #D3D3D3;
         border-top-color: #ff6417;
         border-top-style: solid;
         border-top-width: 2px; }
@@ -40,6 +54,8 @@ html {
               width: 100%; }
               html body #app header .navbar .navbar-nav .search-list .nav-search .searchfield {
                 width: 74%; }
+              html body #app header .navbar .navbar-nav .search-list .nav-search .searchfield:focus {
+                outline-color: #ff6417; }
         @media (min-width: 992px) {
           html body #app header .navbar .nav-right {
             float: right;
@@ -66,17 +82,15 @@ html {
         height: 100%;
         z-index: 1;
         width: 0;
-        margin-top: 83.6px;
+        margin-top: 86.6px;
         position: fixed;
         top: 0;
         left: 0;
         overflow-x: hidden;
         transition: 0.5s;
         background-color: white;
-        box-shadow: 2px 5px;
-        border-top-style: solid;
-        border-top-color: black;
-        border-top-width: 2px; }
+        border-right-style: solid;
+        border-right-color: #D3D3D3; }
         html body #app .sidebar .sidebar-content {
           margin-left: 2%; }
           html body #app .sidebar .sidebar-content .sidenav-search .searchfield {
@@ -85,15 +99,91 @@ html {
           padding-top: 0; }
         html body #app .sidebar .close-btn {
           float: right; }
+      html body #app .addCat .addCatF1 {
+        border-right: 2px solid #D3D3D3; }
+      html body #app .addCat .addCatF2 .repeat {
+        position: relative; }
+        html body #app .addCat .addCatF2 .repeat:hover > .label {
+          color: #ff6417; }
+          html body #app .addCat .addCatF2 .repeat:hover > .label::before {
+            border: 6px solid #ff6417;
+            margin-right: 5px; }
+      html body #app .addCat .addCatF2 .radio-btn {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden; }
+        html body #app .addCat .addCatF2 .radio-btn:checked + .label {
+          color: #ff6417; }
+          html body #app .addCat .addCatF2 .radio-btn:checked + .label::before {
+            margin-right: 15px;
+            border: 6px solid #ff6417;
+            background: black; }
+      html body #app .addCat .addCatF2 .label {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 0;
+        color: black;
+        cursor: pointer;
+        transition: all 0.2s linear; }
+      html body #app .addCat .addCatF2 .label::before {
+        display: inline-block;
+        content: "";
+        height: 1.125rem;
+        width: 1.125rem;
+        margin-right: 15px;
+        border: 2px solid black;
+        border-radius: 50%;
+        transition: all 0.2s linear; }
+      html body #app .addCat .btn {
+        float: right; }
+      html body #app input[type='text'], html body #app .mainComponent .user-account input[type='password'], html body #app .mainComponent .user-account input[type='email'] {
+        width: 100%;
+        outline-color: black; }
+      html body #app input[type='text'], html body #app .mainComponent .user-account input[type='password'], html body #app .mainComponent .user-account input[type='email'] {
+        outline-color: #ff6417; }
       html body #app .btn {
-        border-color: #ff6417;
-        border-width: 2px;
-        transition: 0.5s; }
-      html body #app .btn:hover {
-        color: white;
-        background-color: #ff6417;
-        border-color: black;
-        transition: ease-out 0.5s; }
+        height: 50px;
+        text-align: center;
+        width: auto;
+        cursor: pointer; }
+        html body #app .btn span {
+          display: inline-block;
+          vertical-align: middle; }
+      html body #app .btn-animation {
+        color: black;
+        transition: all 0.5s;
+        position: relative;
+        align-items: center; }
+      html body #app .btn-animation::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        background-color: rgba(255, 100, 23, 0.01);
+        border: 1px solid #ff6417;
+        transition: all 0.5s; }
+      html body #app .btn-animation:hover::before {
+        opacity: 0;
+        transform: scale(0.5, 0.5); }
+      html body #app .btn-animation::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        opacity: 0;
+        transition: all 0.5s;
+        background-color: rgba(255, 100, 23, 0.1);
+        border: 2px solid rgba(255, 100, 23, 0.7);
+        transform: scale(1.2, 1.2); }
+      html body #app .btn-animation:hover::after {
+        opacity: 1;
+        transform: scale(1, 1); }
       html body #app .icnbtn {
         border: none;
         background-color: transparent;
@@ -112,22 +202,16 @@ html {
         min-height: 100%;
         transition: 0.5s;
         width: 100%;
-        padding-top: 83.5px;
-        padding-left: 15px;
-        padding-right: 15px; }
+        padding-top: 103.5px;
+        padding-left: 20px;
+        padding-right: 20px; }
         html body #app .mainComponent .user-account .login {
-          border-right-color: black;
+          border-right-color: #D3D3D3;
           border-right-style: solid;
           border-right-width: 2px; }
         html body #app .mainComponent .user-account input[type='text'], html body #app .mainComponent .user-account input[type='password'], html body #app .mainComponent .user-account input[type='email'] {
           width: 100%;
           margin-bottom: 10px;
-          border-color: black;
-          border-width: 2px;
-          outline: none;
           padding-left: 1px; }
-        html body #app .mainComponent .user-account input:focus {
-          border-width: 3px;
-          outline: none; }
 
 /*# sourceMappingURL=main.css.map */
