@@ -1,15 +1,17 @@
 <template>
   <div class="addCat">
+
+
     <form class="login-form" id="login-form">
       <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-3 addCatF1">
-          <h4>Add category</h4>
-          Location of the new category: <p>{{path}}</p>
-          Name of the new category: <input id="category" type="text" name="category" v-model="category">
+              <h4>Choose category</h4>
+          Category of the article: <p>{{path}}</p>
           <br><br>
         </div>
         <div class="col-sm-7 addCatF2">
+          <br>
           <div class="row">
             <div class="col-sm-3 repeat" v-for="cat in categories" v-bind:key="cat.id">
               <input type="radio" v-if="cat.categoryName" class="radio-btn" name="choice" v-bind:id="cat.categoryName" v-model="subCategoryOf" v-bind:value="cat.categoryName"/>
@@ -25,7 +27,7 @@
       <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-3 addCatF1">
-          <div id="submitNewCat-btn" class="btn btn-animation" name="submit-newCategory" @click="submitCategory()"><span>Add new Category</span></div><br>
+          <div id="submitNewCat-btn" class="btn btn-animation" name="submit-newCategory" @click="submitCategory()"><span>Next</span></div><br>
         </div>
         <div class="col-sm-7">
           <div id="submitSuperCat-btn" class="btn btn-animation" name="submit-superCategory" @click="submitSuperCategory()"><span>Submit root category</span></div>
@@ -58,19 +60,17 @@ export default {
   methods: {
 
     submitCategory(){
-      this.$store.dispatch('createCategory', {category: this.category, subCategoryOf: this.subCategoryOf, returnSecureToken: true})
-      this.errorMessageF2 = ""
-      //this.$store.dispatch("getCategories", {subCategoryOf: this.subCategoryOf, returnSecureToken: true})
+      this.$emit('changeC', "appAddArticleInformation");
     },
     submitSuperCategory(){
       if (this.subCategoryOf != "") {
-      this.$store.dispatch('getCategoriesKey', {subCategoryOf: this.subCategoryOf, returnSecureToken: true})
-      this.path = this.path + this.subCategoryOf + "/"
-      this.subCategoryOf = ""
-      this.errorMessageF2 = ""
-    } else {
-      this.errorMessageF2 = "You have to select a root category."
-    }
+        this.$store.dispatch('getCategoriesKey', {subCategoryOf: this.subCategoryOf, returnSecureToken: true})
+        this.path = this.path + this.subCategoryOf + "/"
+        this.subCategoryOf = ""
+        this.errorMessageF2 = ""
+      } else {
+        this.errorMessageF2 = "You have to select a root category."
+      }
     },
     resetSuperCategory(){
       while(this.$store.state.categories.length > 0) {this.$store.state.categories.pop()}

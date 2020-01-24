@@ -1,5 +1,5 @@
 $primary-color: $fontColor;
-$accent-color: $highlightColor;
+;
 
 
 .addCat{
@@ -11,9 +11,9 @@ $accent-color: $highlightColor;
     .repeat{
       position: relative;
       &:hover > .label {
-        color: $accent-color;
+        color: $highlightColor;
         &::before {
-          border: 6px solid $accent-color;
+          border: 6px solid $lightHighlightColor;
           margin-right: 5px;
         }
       }
@@ -24,11 +24,11 @@ $accent-color: $highlightColor;
       opacity: 0;
       visibility: hidden;
       &:checked + .label {
-        color: $accent-color;
+        color: $highlightColor;
         &::before {
           margin-right: 15px;
-          border: 6px solid $accent-color;
-          background: $primary-color;
+          border: 6px solid $highlightColor;
+          background: $fontColor;
         }
       }
     }

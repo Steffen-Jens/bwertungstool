@@ -1,0 +1,104 @@
+$outerColor: #d3d3d3;
+$primaryColor: white;
+$fontColor: black;
+$contentRadius: 25px 25px 25px 25px;
+$contentMargin: 2%;
+$barBorderStyle: solid;
+$barBorderWidth: 2px;
+$highlightColor: #ff6417;
+$logoHeight: 50px;
+$sidenavTransition: 0.5s;
+$mediaMaxWidth: 991px;
+$mediaMinWidth: 992px;
+$textPadding: 15px;
+$hoverTransition: 0.5s;
+
+
+html {
+  height: 100%;
+
+  body {
+
+    @media (min-width: $mediaMaxWidth) {
+      .mob-hide {
+        display: none;
+      }
+    }
+    margin: 0 0 0 0;
+    color: $fontColor;
+    background: $outerColor;
+    height: 100%;
+
+    .container-fluid {
+      height: 100%;
+      padding: 0px 0px 0px 0px;
+
+      .app{
+        height: 100%;
+        header {
+
+        }
+        @import "navbar";
+        @import "sidebar";
+
+        .btn {
+          border-color: $highlightColor;
+          border-width: $barBorderWidth;
+          transition: $hoverTransition;
+        }
+
+        .btn:hover {
+
+          color: white;
+          background-color: $highlightColor;
+          border-color: $fontColor;
+          transition: ease-out $hoverTransition;
+        }
+
+        .icnbtn {
+          border: none;
+          background-color: transparent;
+          outline: none;
+        }
+
+        .icnbtn:focus {
+          box-shadow: none;
+        }
+
+        .icon::before {
+          color: $fontColor;
+        }
+
+
+        .adm-button {
+          display: none;
+        }
+
+
+        .icnbtn:hover {
+          .icon:before {
+            transition: $hoverTransition;
+            color: $highlightColor;
+          }
+        }
+
+        .content {
+          background: $primaryColor;
+          min-height: 100%;
+          transition: $sidenavTransition;
+
+          .main-content {
+            width: 100%;
+            padding-top: 83.5px;
+            padding-left: $textPadding;
+            padding-right: $textPadding;
+
+
+            @import "login";
+          }
+
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="row user-account">
-      <div class="col-sm-6 login">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-5 login">
         <h4>Sign in</h4>
         <form method="post" class="login-form" id="login-form">
           Email: <input id="loginEmail" type="email" name="loginEmail" @keyup.enter="login" v-model="loginEmail">
@@ -10,9 +11,9 @@
           <br>
           <div id="login-btn" class="btn btn-animation" name="submit-login" @click="login"><span>Sign in</span></div><br>
         </form>
-        <div><p id="login-error"> </p></div>
+        <div id="error">{{logErrorMessage}}</div>
       </div>
-      <div class="col-sm-6 registration">
+      <div class="col-sm-5 registration">
         <h4>Sign up</h4>
         <form method="post" class="registration-form" id="registration-form">
           Email: <input type="email" name="email" @keyup.enter="register" v-model="regEmail"><br>
@@ -21,8 +22,10 @@
           Repeat Password: <input type="password" name="repeatPassword" @keyup.enter="register" v-model="regRepeatPassword"><br>
           <div id="registration-btn" class="btn btn-animation" name="submit-registration" @click="register"><span>Sign up</span></div><br>
         </form>
-        <div><p id="registration-error"> </p></div>
+        <br>
+        <div id="error">{{regErrorMessage}}</div>
       </div>
+      <div class="col-sm-1"></div>
     </div>
   </div>
 </template>
@@ -41,7 +44,9 @@ export default{
       regUsername: "",
       regPassword: "",
       regRepeatPassword: "",
-      regIsAdmin: false
+      regIsAdmin: false,
+      regErrorMessage: "",
+      logErrorMessage: ""
     }
   },
   methods: {
@@ -55,21 +60,36 @@ export default{
     */
 
     this.$store.dispatch('login', {email: this.loginEmail, password: sha256(this.loginPassword), returnSecureToken: true})
-
+    setTimeout(() => {
+      this.logErrorMessage = this.$store.state.errorMessage
+    }, 800)
 
   },
   register(){
-    if(this.regPassword == this.regRepeatPassword){
-      /*    const newUserData = {
-      email: authData.regEmail,
-      password: authData.regPassword,
-      returnSecureToken: true
-    }
-    */
-    this.$store.dispatch('register', {email: this.regEmail, username: this.regUsername, password: sha256(this.regPassword), isAdmin: this.regIsAdmin, returnSecureToken: true})
+    var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    if (this.regEmail != "" && this.regUsername != "") {
+      if(this.regPassword == this.regRepeatPassword){
+        if(regex.test(this.regPassword)){
+          /*    const newUserData = {
+          email: authData.regEmail,
+          password: authData.regPassword,
+          returnSecureToken: true
+        }
+        */
+        this.$store.dispatch('register', {email: this.regEmail, username: this.regUsername, password: sha256(this.regPassword), isAdmin: this.regIsAdmin, returnSecureToken: true})
+        setTimeout(() => {
+          this.regErrorMessage = this.$store.state.errorMessage
+        }, 800)
 
-  } else{
-    // Error message here
+      }else{
+        /* eslint-disable no-console */
+        this.regErrorMessage = "The entered password is not strong enough. Please make sure to use a capital letter, a lower case letter, a number and a password length of at least 8 characters."
+      }
+    }else{
+      this.regErrorMessage = "The entered passwords don't match."
+    }
+  }else{
+    this.errorMessage = "Every field is mandatory for registration."
   }
 }
 },

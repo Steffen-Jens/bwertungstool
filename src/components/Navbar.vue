@@ -3,6 +3,7 @@
     <nav class="navbar navbar-expand-lg">
       <a class="navbar-brand" href="#" @click="newContent='appHome'; setNewContent()"><img class="logo" src="../assets/logo.png"></a>
       <!-- Navbar brand-->
+      <div>
       <button title="Search" type="button" class="navbar-toggler icnbtn nav-button openbtn"
       @click="openNav(); ">
       <i class="fas fa-search icon"><span class="nav-span">Search</span></i>
@@ -12,6 +13,7 @@
     aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" @click="closeNav()">
     <i class="fas fa-caret-square-down icon"><span class="nav-span">Menu</span></i>
   </button>
+</div>
   <div class="collapse navbar-collapse" id="navbarTop">
     <ul class="navbar-nav">
       <li class="nav-item search-list">
@@ -68,7 +70,7 @@ export default {
     },
     loadAddArticle(){
       if(this.$store.state.userId != null){
-        this.loginPage = "appAddArticle";
+        this.newContent = "appAddArticle";
         this.setNewContent();
       }else{
         if (confirm("You have to be signed in to add articles.")) {

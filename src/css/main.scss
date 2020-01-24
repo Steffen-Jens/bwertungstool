@@ -10,12 +10,13 @@ $contentMargin: 2%;
 $barBorderStyle: solid;
 $barBorderWidth: 2px;
 $highlightColor: #ff6417;
+$lightHighlightColor: rgba(255,100,23,0.7);
 $logoHeight: 50px;
 $sidenavTransition: 0.5s;
 $mediaMaxWidth: 991px;
 $mediaMinWidth: 992px;
 $textPadding: 20px;
-$hoverTransition: 0.5s;
+$hoverTransition: 0.7s;
 
 html {
   height: 100%;
@@ -63,17 +64,42 @@ html {
     border-color: $borderColor;
     transition: ease-out $hoverTransition;
   }*/
+
+  #error{
+    color: red;
+    background: rgba(255,100,23,0.1);
+    border-style: $barBorderStyle;
+    border-color: $primaryColor;
+    text-align: center;
+  }
+
+  #preview {
+    display: flex;
+    align-items: center;
+  }
+
+  #preview img {
+    max-width: 100%;
+    max-height: 500px;
+  }
+
   .btn {
-    height: 50px;
     text-align: center;
     width: auto;
     cursor: pointer;
+    padding-top: 5px;
+    margin-right: 5px;
 
     span{
       display: inline-block;
       vertical-align: middle;
     }
   }
+
+  .btn:active{
+
+  }
+
   .btn-animation {
     color: black;
     transition: all $hoverTransition;
@@ -91,7 +117,7 @@ html {
     z-index: 0;
     background-color: rgba(255,100,23,0.01);
     border: 1px solid rgba(255,100,23,1);
-    transition: all 0.5s;
+    transition: all $hoverTransition;
   }
   .btn-animation:hover::before {
     opacity: 0 ;
@@ -108,7 +134,7 @@ html {
     opacity: 0;
     transition: all $hoverTransition;
     background-color: rgba(255,100,23,0.1);
-    border: 2px solid rgba(255,100,23,0.7);
+    border: 2px solid $lightHighlightColor;
     transform: scale(1.2,1.2);
   }
   .btn-animation:hover::after {
@@ -152,14 +178,52 @@ html {
     padding-left: $textPadding;
     padding-right: $textPadding;
 
+    .MC-Main{
+      h1{
+        color: $highlightColor;
+      }
+      display: flex;
+      justify-content: center;
 
+      .welcome-logo{
+        margin-left: 15px;
+      }
+    }
 
-
+    .row{
+      width: 100%;
+      margin: 0;
+    }
+    .card-board{
+      display: flex;
+      justify-content: center;
+      .article-cards{
+        -webkit-box-shadow: inset -8px -7px 15px 5px rgba(255,100,23,0.24);
+        -moz-box-shadow: inset -8px -7px 15px 5px rgba(255,100,23,0.24);
+        box-shadow: inset -8px -7px 15px 5px rgba(255,100,23,0.24);
+        height: 45vh;
+        margin-left: 5px;
+        p {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2; /* number of lines to show */
+        }
+      }
+    }
 
     @import "login";
 
 
   }
+
+  @media (max-width: 425px) {
+    .mainComponent{
+      padding-top: 83.5px + $textPadding + $logoHeight;
+    }
+  }
+
 }
 }
 

@@ -1,0 +1,41 @@
+.sidebar {
+  padding-top: 0;
+  height: 100%;
+  z-index: 1;
+  width: 0;
+  margin-top:83.6px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: $sidenavTransition;
+  background-color: $primaryColor;
+  box-shadow: 2px 5px;
+  border-top-style: $barBorderStyle;
+  border-top-color: $fontColor;
+  border-top-width: $barBorderWidth;
+
+  .sidebar-content{
+    margin-left: $contentMargin;
+    .sidenav-search{
+      .searchfield{
+        width: 80%;
+
+      }
+    }
+  }
+
+  .sidebar-button {
+    padding-top: 0;
+  }
+
+  .close-btn {
+    float: right;
+  }
+
+
+}
+
+
+
+

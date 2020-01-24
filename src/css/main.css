@@ -106,7 +106,7 @@ html {
         html body #app .addCat .addCatF2 .repeat:hover > .label {
           color: #ff6417; }
           html body #app .addCat .addCatF2 .repeat:hover > .label::before {
-            border: 6px solid #ff6417;
+            border: 6px solid rgba(255, 100, 23, 0.7);
             margin-right: 5px; }
       html body #app .addCat .addCatF2 .radio-btn {
         position: absolute;
@@ -141,17 +141,30 @@ html {
         outline-color: black; }
       html body #app input[type='text'], html body #app .mainComponent .user-account input[type='password'], html body #app .mainComponent .user-account input[type='email'] {
         outline-color: #ff6417; }
+      html body #app #error {
+        color: red;
+        background: rgba(255, 100, 23, 0.1);
+        border-style: solid;
+        border-color: white;
+        text-align: center; }
+      html body #app #preview {
+        display: flex;
+        align-items: center; }
+      html body #app #preview img {
+        max-width: 100%;
+        max-height: 500px; }
       html body #app .btn {
-        height: 50px;
         text-align: center;
         width: auto;
-        cursor: pointer; }
+        cursor: pointer;
+        padding-top: 5px;
+        margin-right: 5px; }
         html body #app .btn span {
           display: inline-block;
           vertical-align: middle; }
       html body #app .btn-animation {
         color: black;
-        transition: all 0.5s;
+        transition: all 0.7s;
         position: relative;
         align-items: center; }
       html body #app .btn-animation::before {
@@ -164,7 +177,7 @@ html {
         z-index: 0;
         background-color: rgba(255, 100, 23, 0.01);
         border: 1px solid #ff6417;
-        transition: all 0.5s; }
+        transition: all 0.7s; }
       html body #app .btn-animation:hover::before {
         opacity: 0;
         transform: scale(0.5, 0.5); }
@@ -177,7 +190,7 @@ html {
         height: 100%;
         z-index: 0;
         opacity: 0;
-        transition: all 0.5s;
+        transition: all 0.7s;
         background-color: rgba(255, 100, 23, 0.1);
         border: 2px solid rgba(255, 100, 23, 0.7);
         transform: scale(1.2, 1.2); }
@@ -195,7 +208,7 @@ html {
       html body #app .adm-button {
         display: none; }
       html body #app .icnbtn:hover .icon:before {
-        transition: 0.5s;
+        transition: 0.7s;
         color: #ff6417; }
       html body #app .mainComponent {
         background: white;
@@ -205,6 +218,32 @@ html {
         padding-top: 103.5px;
         padding-left: 20px;
         padding-right: 20px; }
+        html body #app .mainComponent .MC-Main {
+          display: flex;
+          justify-content: center; }
+          html body #app .mainComponent .MC-Main h1 {
+            color: #ff6417; }
+          html body #app .mainComponent .MC-Main .welcome-logo {
+            margin-left: 15px; }
+        html body #app .mainComponent .row {
+          width: 100%;
+          margin: 0; }
+        html body #app .mainComponent .card-board {
+          display: flex;
+          justify-content: center; }
+          html body #app .mainComponent .card-board .article-cards {
+            -webkit-box-shadow: inset -8px -7px 15px 5px rgba(255, 100, 23, 0.24);
+            -moz-box-shadow: inset -8px -7px 15px 5px rgba(255, 100, 23, 0.24);
+            box-shadow: inset -8px -7px 15px 5px rgba(255, 100, 23, 0.24);
+            height: 45vh;
+            margin-left: 5px; }
+            html body #app .mainComponent .card-board .article-cards p {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              /* number of lines to show */ }
         html body #app .mainComponent .user-account .login {
           border-right-color: #D3D3D3;
           border-right-style: solid;
@@ -213,5 +252,8 @@ html {
           width: 100%;
           margin-bottom: 10px;
           padding-left: 1px; }
+      @media (max-width: 425px) {
+        html body #app .mainComponent {
+          padding-top: 153.5px; } }
 
 /*# sourceMappingURL=main.css.map */
