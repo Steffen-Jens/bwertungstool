@@ -6,8 +6,20 @@
       <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-3 addCatF1">
-              <h4>Choose category</h4>
-          Category of the article: <p>{{path}}</p>
+          <h4>Choose category</h4>
+          Category of the item: <p>{{path}}</p>
+          <br>
+          Display this item on the homepage.
+          <div class="center">
+            <label class="label">
+              <input  class="label__checkbox" type="checkbox" v-model="showOnMainpage"/>
+              <span class="label__text">
+                <span class="label__check">
+                  <i class="fa fa-check icon"></i>
+                </span>
+              </span>
+            </label>
+          </div>
           <br><br>
         </div>
         <div class="col-sm-7 addCatF2">
@@ -27,11 +39,20 @@
       <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-3 addCatF1">
-          <div id="submitNewCat-btn" class="btn btn-animation" name="submit-newCategory" @click="submitCategory()"><span>Next</span></div><br>
+          <div class="button-container">
+            <span class="mas">Next</span>
+            <button id='work' type="button" name="Hover" @click="submitCategory()">Next</button>
+          </div>
         </div>
         <div class="col-sm-7">
-          <div id="submitSuperCat-btn" class="btn btn-animation" name="submit-superCategory" @click="submitSuperCategory()"><span>Submit root category</span></div>
-          <div id="clearSuperCat-btn" class="btn btn-animation" name="reset-superCategory" @click="resetSuperCategory()"><span>Reset root category</span></div>
+          <div class="button-container">
+            <span class="mas">Submit</span>
+            <button id='work' type="button" name="Hover" @click="submitSuperCategory()">Submit root category</button>
+          </div>
+          <div class="button-container">
+            <span class="mas">Reset</span>
+            <button id='work' type="button" name="Hover" @click="resetSuperCategory()">Reset root category</button>
+          </div>
           <br><br>
           <div id="error">{{errorMessageF2}}</div>
         </div>
@@ -54,17 +75,20 @@ export default {
       subCategoryOf: "",
       path: "/",
       categories: this.$store.state.categories,
-      errorMessageF2: ""
+      errorMessageF2: "",
+      showOnMainpage: false
     }
   },
   methods: {
 
     submitCategory(){
+      this.$store.state.addArticleOnMainPage = this.showOnMainpage
       this.$emit('changeC', "appAddArticleInformation");
+
     },
     submitSuperCategory(){
       if (this.subCategoryOf != "") {
-        this.$store.dispatch('getCategoriesKey', {subCategoryOf: this.subCategoryOf, returnSecureToken: true})
+        this.$store.dispatch('getCategoriesKey', {folder: "/catregory", subCategoryOf: this.subCategoryOf, returnSecureToken: true})
         this.path = this.path + this.subCategoryOf + "/"
         this.subCategoryOf = ""
         this.errorMessageF2 = ""
@@ -73,7 +97,6 @@ export default {
       }
     },
     resetSuperCategory(){
-      while(this.$store.state.categories.length > 0) {this.$store.state.categories.pop()}
       this.path = "/"
       this.subCategoryOf = ""
       this.$store.state.superCategory = ""
@@ -82,6 +105,7 @@ export default {
     }
   },
   created: function (){
+    this.resetSuperCategory
     this.$store.commit('closeNav')
     this.$store.dispatch("getCategories", {subCategoryOf: this.subCategoryOf, returnSecureToken: true})
   }

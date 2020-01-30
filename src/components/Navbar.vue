@@ -33,8 +33,8 @@
   <div class="nav-right">
     <ul class="navbar-nav">
       <li class="nav-item button-list">
-        <a class="nav-link" title="Add article" href="#" @click="loadAddArticle()">
-          <i class="fas fa-plus icon"><span class="nav-span navbar-toggler">Add Article</span></i>
+        <a class="nav-link" title="Add item" href="#" @click="loadAddArticle()">
+          <i class="fas fa-plus icon"><span class="nav-span navbar-toggler">Add item</span></i>
         </a>
       </li>
       <li class="nav-item button-list" v-if="this.$store.state.userId!=null">

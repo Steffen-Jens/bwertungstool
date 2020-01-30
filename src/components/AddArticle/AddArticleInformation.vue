@@ -20,8 +20,8 @@
         </form>
         <div>
           <p>Progress: {{uploadValue+"%"}}</p>
-      <progress id="progress" :value="uploadValue" max="100" ></progress>
-    </div>
+          <progress id="progress" :value="uploadValue" max="100" ></progress>
+        </div>
         <div id="error">{{addArtErrorMessage}}</div>
       </div>
       <div class="col-sm-1"></div>
@@ -42,6 +42,7 @@ export default{
       uploadValue: 0,
       picture: null,
       imageData: null,
+      imageLocation: null
     }
   },
   methods: {
@@ -57,11 +58,17 @@ export default{
         /* eslint-disable no-console */
         console.log(res)
         this.picture=null;
-        const storageRef=firebase.storage().ref('/articles/' + this.$store.state.superCategory + `/${res.data.name}/${this.imageData.name}`).put(this.imageData);
+        this.imageLocation = '/articles' + this.$store.state.superCategory  + res.data.name + `/${this.imageData.name}`
+
+        axios.put("/category" + this.$store.state.superCategory + "/article/" + res.data.name + ".json" + "?auth=" + this.$store.state.idToken, {brand: this.brand, name: this.name, description: this.description, creator: this.$store.state.userId, imageLocation: this.imageLocation})
+        const storageRef=firebase.storage().ref(this.imageLocation).put(this.imageData);
         storageRef.on(`state_changed`,snapshot=>{
           this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
         }, error=>{console.log(error.message)}
       );
+      if(this.$store.state.addArticleOnMainPage == true){
+        axios.post("/mainPage/article.json?auth=" + this.$store.state.idToken, {brand: this.brand, name: this.name, description: this.description, creator: this.$store.state.userId, imageLocation: this.imageLocation})
+      }
     })
     .catch(error => {
       /* eslint-disable no-console */

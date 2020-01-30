@@ -9,7 +9,10 @@
           <br>
           Password: <input id="loginPassword" type="password" name="loginPassword" @keyup.enter="login" v-model="loginPassword">
           <br>
-          <div id="login-btn" class="btn btn-animation" name="submit-login" @click="login"><span>Sign in</span></div><br>
+          <div class="button-container">
+            <span class="mas">Sign in</span>
+            <button id='work' type="button" name="Hover" @click="login">Sign in</button>
+          </div>
         </form>
         <div id="error">{{logErrorMessage}}</div>
       </div>
@@ -20,7 +23,10 @@
           Username: <input type="text" name="username" @keyup.enter="register" v-model="regUsername"><br>
           Password: <input type="password" name="password" @keyup.enter="register" v-model="regPassword"><br>
           Repeat Password: <input type="password" name="repeatPassword" @keyup.enter="register" v-model="regRepeatPassword"><br>
-          <div id="registration-btn" class="btn btn-animation" name="submit-registration" @click="register"><span>Sign up</span></div><br>
+          <div class="button-container">
+            <span class="mas">Sign up</span>
+            <button id='work' type="button" name="Hover" @click="register">Sign up</button>
+          </div>
         </form>
         <br>
         <div id="error">{{regErrorMessage}}</div>

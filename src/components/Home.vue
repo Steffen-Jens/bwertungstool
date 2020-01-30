@@ -1,14 +1,6 @@
 <template>
   <div>
     <br>
-    <br>
-    <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-10 MC-Main">
-        <h1>Welcome to</h1>
-        <img class="welcome-logo" src="../assets/logo.png" alt="">
-      </div>
-      <div class="col-sm-1"></div>
       <div class="row">
         <div class="col-sm-12">
           <div class="row card-board">
@@ -16,11 +8,11 @@
               <h4>{{art.brand}}</h4>
               <h5>{{art.name}}</h5>
               <p>{{art.description}}</p>
+              <img :src="art.articleImageURL" alt="">
             </div>
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -39,7 +31,7 @@ export default {
 
   },
   created: function (){
-    this.$store.dispatch("getArticles", {subCategoryOf: this.subCategoryOf, returnSecureToken: true})
+    this.$store.dispatch("getMainArticles")
   }
 }
 

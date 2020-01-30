@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import auth_axios from "./auth_axios"
 import axios from "axios"
+import firebase from 'firebase';
 
 
 
@@ -19,7 +20,8 @@ export const store = new Vuex.Store({
     superCategory: '',
     errorMessage: null,
     menuExpanded: false,
-    articles: []
+    articles: [],
+    addArticleOnMainPage: false
   },
   //############################################################################
   mutations: {
@@ -68,7 +70,7 @@ export const store = new Vuex.Store({
       }
     },
     setArticles(state, articles){
-      state.articles.push({name: articles.name, brand: articles.brand, description: articles.description})
+      state.articles.push({name: articles.name, brand: articles.brand, description: articles.description, articleImageURL: articles.articleImageURL})
     }
   },
   //############################################################################
@@ -167,89 +169,123 @@ export const store = new Vuex.Store({
         state.errorMessage = "Too many unsuccessful login attempts. Please try again later."
       }
     }
-    )
-  },
-  //-------------------------- Save new Category in Realtime Database of firebase
-  createCategory({dispatch, state}, dbData){
-    axios.post("/category" + state.superCategory + ".json" + '?auth=' + state.idToken, {category: dbData.category})
-    .then(res => {
+  )
+},
+//-------------------------- Save new Category in Realtime Database of firebase
+createCategory({dispatch, state}, dbData){
+  axios.post("/category" + state.superCategory + ".json" + '?auth=' + state.idToken, {category: dbData.category})
+  .then(res => {
+    /* eslint-disable no-console */
+    console.log(res)
+    while(state.categories.length > 0) {state.categories.pop()}
+    dispatch("getCategories")
+  })
+  .catch(error => {
+    /* eslint-disable no-console */
+    console.log(error)
+  })
+},
+//-------------------------- Get Category from Realtime Database of firebase
+getCategories({commit, state}){
+    while(state.categories.length > 0) {state.categories.pop()}
+  axios.get('/category' + state.superCategory + '.json' + '?auth=' + state.idToken)
+  .then(res => {
+    /* eslint-disable no-console */
+    console.log("GET METHOD:" + res)
+    const data = res.data
+    for (let key in data){
+      const category = data[key]
       /* eslint-disable no-console */
-      console.log(res)
-      while(state.categories.length > 0) {state.categories.pop()}
-      dispatch("getCategories")
-    })
-    .catch(error => {
-      /* eslint-disable no-console */
-      console.log(error)
-    })
-  },
-  //-------------------------- Get Category from Realtime Database of firebase
-  getCategories({commit, state}){
-    axios.get('/category' + state.superCategory + '.json' + '?auth=' + state.idToken)
-    .then(res => {
-      /* eslint-disable no-console */
-      console.log("GET METHOD:" + res)
-      const data = res.data
-      for (let key in data){
-        const category = data[key]
-        /* eslint-disable no-console */
-        console.log(category.category),
-        commit('setCategories', {
-          category: category.category
-        })
-      }
-    })
+      console.log(category.category),
+      commit('setCategories', {
+        category: category.category
+      })
+    }
+  })
 
-    .catch(error => {
-      this.error = error,
-      console.log(error)
-    })
-  },
-  //-------------------------- Get Key of Supercategory to make list of Subcategories possible
-  getCategoriesKey({state, dispatch}, superCat){
-    axios.get('/category' + state.superCategory + '.json' + '?auth=' + state.idToken)
-    .then(res => {
-      /* eslint-disable no-console */
-      console.log("GET METHOD:" + res)
-      const data = res.data
-      for (let key in data){
-        const categories = data[key]
-        //console.log("Key: " + key)
-        if(categories.category == superCat.subCategoryOf){
-          state.superCategory = state.superCategory + '/' + key
-          while(state.categories.length > 0) {state.categories.pop()}
-          dispatch("getCategories")
-        }
+  .catch(error => {
+    this.error = error,
+    console.log(error)
+  })
+},
+//-------------------------- Get Key of Supercategory to make list of Subcategories possible
+getCategoriesKey({state, dispatch}, superCat){
+  axios.get('/category' + state.superCategory + '.json' + '?auth=' + state.idToken)
+  .then(res => {
+    /* eslint-disable no-console */
+    console.log("GET METHOD:" + res)
+    const data = res.data
+    for (let key in data){
+      const categories = data[key]
+      //console.log("Key: " + key)
+      if(categories.category == superCat.subCategoryOf){
+        state.superCategory = state.superCategory + '/' + key
+        while(state.categories.length > 0) {state.categories.pop()}
+        dispatch("getCategories")
       }
-    })
-    .catch(error => {
-      this.error = error,
-      console.log(error)
-    })
-  },
-  getArticles({commit, state}){
-    axios.get("category" + state.superCategory +'/article.json')
-    .then(res => {
-      /* eslint-disable no-console */
-      console.log("GET METHOD:" + res)
-      const data = res.data
-      for (let key in data){
-        const category = data[key]
+    }
+  })
+  .catch(error => {
+    this.error = error,
+    console.log(error)
+  })
+},
+getArticles({commit, state}){
+  while(state.articles.length > 0) {state.articles.pop()}
+  axios.get("/category" + state.superCategory +'/article.json')
+  .then(res => {
+    /* eslint-disable no-console */
+    console.log("GET METHOD:" + res)
+    const data = res.data
+    for (let key in data){
+      const article = data[key]
+      var productImage = firebase.storage().ref(article.imageLocation)
+      productImage.getDownloadURL().then(function(url) {
         /* eslint-disable no-console */
-        console.log(category.article),
+        console.log(article.article),
         commit('setArticles', {
-          name: category.name,
-          brand: category.brand,
-          description: category.description
+          name: article.name,
+          brand: article.brand,
+          description: article.description,
+          articleImageURL: url
         })
-      }
-    })
+      })
+    }
+  })
 
-    .catch(error => {
-      this.error = error,
-      console.log(error)
-    })
-  }
+  .catch(error => {
+    this.error = error,
+    console.log(error)
+  })
+},
+getMainArticles({commit, state}){
+  while(state.articles.length > 0) {state.articles.pop()}
+  axios.get("/mainPage/article" + '.json')
+  .then(res => {
+    /* eslint-disable no-console */
+    console.log("GET METHOD:" + res)
+    const data = res.data
+    for (let key in data){
+      const article = data[key]
+      var productImage = firebase.storage().ref(article.imageLocation)
+      productImage.getDownloadURL().then(function(url) {
+        /* eslint-disable no-console */
+        console.log(article.article),
+        commit('setArticles', {
+          name: article.name,
+          brand: article.brand,
+          description: article.description,
+          articleImageURL: url
+        })
+      })
+    }
+  })
+
+  .catch(error => {
+    this.error = error,
+    console.log(error)
+  })
+}
 },
 //############################################################################
 getters: {
