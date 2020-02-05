@@ -28,7 +28,7 @@ export default {
     }
   },
   created: function (){
-    this.$store.dispatch("getMainArticles")
+    this.$store.dispatch("getArticles")
   }
 }
 

@@ -3,9 +3,21 @@ import Vue from 'vue'
 import App from './App.vue'
 import axios from 'axios'
 import { store } from './store'
+import VueRouter from 'vue-router'
+import { routes } from './routes'
 import firebase from 'firebase'
+import 'expose-loader?jquery!jquery'
+import VueSimpleAlert from "vue-simple-alert";
 
 Vue.config.productionTip = false
+
+Vue.use(VueSimpleAlert)
+
+Vue.use(VueRouter)
+const router = new VueRouter({
+  routes: routes
+})
+
 axios.defaults.baseURL = 'https://b-wertung.firebaseio.com/'
 
 var firebaseConfig = {
@@ -24,6 +36,7 @@ var firebaseConfig = {
 
 new Vue({
   el: '#app',
+  router,
   store,
   render: h=> h(App)
 })

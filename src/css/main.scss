@@ -1,6 +1,5 @@
 @import 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300';
 
-
 $outerColor: #d3d3d3;
 $primaryColor: white;
 $fontColor: black;
@@ -16,40 +15,49 @@ $sidenavTransition: 0.5s;
 $mediaMaxWidth: 991px;
 $mediaMinWidth: 992px;
 $textPadding: 20px;
-$hoverTransition: 0.7s;
+$hoverTransition: 0.5s;
+$navColor: #96999d;
+$lightNavColor: #41474e;
+$navBackgroundColor: #353a40;
+$focusBorderWidth: 2px;
 
 html {
   height: 100%;
 
   body {
+    margin: 0 0 0 0;
+    color: $fontColor;
+    background: $outerColor;
+    height: 100%;
 
     @media (min-width: $mediaMaxWidth) {
       .mob-hide {
         display: none;
       }
     }
-    margin: 0 0 0 0;
-    color: $fontColor;
-    background: $outerColor;
-    height: 100%;
 
     #app{
-      height: 100%;
-      header {
-
-
-        @import "navbar";
-      }
+      @import "navbar";
       @import "sidebar";
-      @import "addCat";
-
-
-
-
-
-
+      @import "mainComponent";
       @import url('https://fonts.googleapis.com/css?family=Lato:100,300,400');
       @import url('https://fonts.googleapis.com/css?family=Roboto:100');
+
+      height: 100%;
+
+
+      //Links start
+
+      .link:hover{
+        color: $highlightColor;
+        font-weight: bold;
+        transition: 0.05s;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      //Links end
+      //Buttons Start
 
       @mixin button($bcolor,
       $url,
@@ -66,8 +74,6 @@ html {
         color: $fontColor;
       }
 
-
-
       .button-container {
         position: relative;
         width: fit-content + 10px;
@@ -75,19 +81,23 @@ html {
         border: 1px solid $highlightColor;
         transition: 0.5s;
         letter-spacing: 1px;
-        float: right;
         margin-right: 5px;
+        float: right;
+        border-radius: 8px;
 
-        button {
-          width: fit-content;
-          height: 100%;
-          letter-spacing: 1px;
+
+
+        #work {
           @include button(#000,
           "https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png",
           2300%,
           100%,
           none,
           #fff);
+          width: fit-content;
+          height: 100%;
+          letter-spacing: 1px;
+          border-radius: 8px;
           cursor: pointer;
           -webkit-animation: ani2 1s steps(22) forwards;
           animation: ani2 1s steps(22) forwards;
@@ -97,7 +107,8 @@ html {
             animation: ani 1s steps(22) forwards;
           }
         }
-        button:focus{
+
+        #work:focus{
           outline: 0;
         }
       }
@@ -111,6 +122,7 @@ html {
         height: 100%;
         position: absolute;
         overflow: hidden;
+        border-radius: 8px
       }
 
       -webkit-keyframes ani {
@@ -162,234 +174,272 @@ html {
         }
       }
 
+      //Navbuttons start
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      input[type='text']{
-        width:100%;
-        outline-color: black;
+      .mn-button{
+        background-color: #353a40;
+        border-color: transparent;
+        font-size: 4vh;
+        color: $navColor;
       }
-      input[type='text']{
-        outline-color: $highlightColor;
-      }
-      /*.btn {
-      border-color: $highlightColor;
-      border-width: $barBorderWidth;
-      transition: $hoverTransition;
-    }
 
-    .btn:hover {
-
-    color: white;
-    background-color: $highlightColor;
-    border-color: $borderColor;
-    transition: ease-out $hoverTransition;
-  }*/
-
-  #error{
-    color: red;
-    background: rgba(255,100,23,0.1);
-    border-style: $barBorderStyle;
-    border-color: $primaryColor;
-    text-align: center;
-  }
-
-  #preview {
-    display: flex;
-    align-items: center;
-  }
-
-  #preview img {
-    max-width: 100%;
-    max-height: 500px;
-  }
-
-  .btn {
-    text-align: center;
-    width: auto;
-    cursor: pointer;
-    padding-top: 5px;
-    margin-right: 5px;
-
-    span{
-      display: inline-block;
-      vertical-align: middle;
-    }
-  }
-
-  .btn:active{
-
-  }
-
-  .btn-animation {
-    color: black;
-    transition: all $hoverTransition;
-    position: relative;
-    align-items: center;
-
-  }
-  .btn-animation::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    background-color: rgba(255,100,23,0.01);
-    border: 1px solid rgba(255,100,23,1);
-    transition: all $hoverTransition;
-  }
-  .btn-animation:hover::before {
-    opacity: 0 ;
-    transform: scale(0.5,0.5);
-  }
-  .btn-animation::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    opacity: 0;
-    transition: all $hoverTransition;
-    background-color: rgba(255,100,23,0.1);
-    border: 2px solid $lightHighlightColor;
-    transform: scale(1.2,1.2);
-  }
-  .btn-animation:hover::after {
-    opacity: 1;
-    transform: scale(1,1);
-  }
-
-  .icnbtn {
-    border: none;
-    background-color: transparent;
-    outline: none;
-  }
-
-  .icnbtn:focus {
-    box-shadow: none;
-  }
-
-  .icon::before {
-    color: $fontColor;
-  }
-
-
-  .adm-button {
-    display: none;
-  }
-
-
-  .icnbtn:hover {
-    .icon:before {
-      transition: $hoverTransition;
-      color: $highlightColor;
-
-    }
-  }
-
-  .mainComponent {
-    background: $primaryColor;
-    min-height: 100%;
-    height: auto;
-    transition: $sidenavTransition;
-    width: 100%;
-    padding-top: 83.5px + $textPadding;
-    padding-left: $textPadding;
-    padding-right: $textPadding;
-
-    .MC-Main{
-      height: 100%;
-      h1{
+      .mn-button:hover{
+        transition: $hoverTransition;
         color: $highlightColor;
       }
-      display: flex;
-      justify-content: center;
 
-      .welcome-logo{
-        margin-left: 15px;
+      .mn-button:active{
+        outline-color: $highlightColor;
       }
-    }
 
-    .row{
-      width: 100%;
-      margin: 0;
-    }
-    .card-board{
-      display: flex;
-      justify-content: center;
-      .article-cards{
+      .mn-button:focus{
+        outline-color: $highlightColor;
+        color: $highlightColor;
+      }
+      //Navbuttons end
+      //Radiobuttons start
+      .repeat{
+        position: relative;
+        min-width: fit-content;
+        &:hover > .label {
+          color: $highlightColor;
+          &::before {
+            border: 6px solid $lightHighlightColor;
+            margin-right: 5px;
+          }
+        }
+      }
+      .radio-btn {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        &:checked + .label {
+          color: $highlightColor;
+          &::before {
+            margin-right: 15px;
+            border: 6px solid $highlightColor;
+            background: $fontColor;
+          }
+        }
+      }
+      .label {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 0;
+        color: $fontColor;
+        cursor: pointer;
+        transition: all 0.2s linear;
+      }
+
+      .label::before {
         display: inline-block;
-        text-align: center;
-        -webkit-box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.32);
-        -moz-box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.32);
-        box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.32);
-        height: 45vh;
-        margin-left: 5px;
-        margin-top: 5px;
-        p {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          margin-bottom: 8px;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2; /* number of lines to show */
+        content: "";
+        height: 1.125rem;
+        width: 1.125rem;
+        margin-right: 15px;
+        border: $barBorderWidth solid $fontColor;
+        border-radius: 50%;
+        transition: all 0.2s linear;
+      }
+
+
+      //RadioButtons end
+      //Checkbox Start
+
+
+      .label__checkbox {
+        display: none;
+      }
+
+      .label__check {
+        display: inline-block;
+        border-radius: 50%;
+        border: $barBorderWidth $barBorderStyle black;
+        background: white;
+        vertical-align: middle;
+        margin-right: 20px;
+        width: 1.25rem;
+        height: 1.25rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border .3s ease;
+        transition: 0.2s;
+
+
+        i.icon {
+          opacity: 0.2;
+          color: transparent;
+          transition: opacity .3s .1s ease;
+          -webkit-text-stroke: 3px rgba(0,0,0,1);
+
         }
-        h4{
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 1;
-        }
-        h5{
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 1;
-        }
-        img{
-          height: 22.5vh;
+
+        &:hover {
+          border: 5px solid $highlightColor;
+          color: white;
         }
       }
-    }
 
-    @import "login";
+
+      .label__checkbox:checked + .label__text .label__check {
+        animation: check .5s cubic-bezier(0.895, 0.030, 0.685, 0.220) forwards;
+        background-color: $highlightColor;
+        border-color: $highlightColor;
+        .icon {
+          opacity: 1;
+          transform: scale(0);
+          color: black;
+          -webkit-text-stroke: 0;
+          animation: icon .3s cubic-bezier(1.000, 0.008, 0.565, 1.650) .1s 1 forwards;
+        }
+      }
+
+      .checkbox {
+        position: relative;
+        float: left;
+      }
+
+      @keyframes icon {
+        from {
+          opacity: 0;
+          transform: scale(0.1);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1)
+        }
+      }
+      //Checkbox end
+      //Buttons end
+      //Input Types start
+      //Input type text
+
+      input[type='text']{
+        outline-color: transparent;
+        border: 1px solid $highlightColor;
+        margin-bottom: 10px;
+        padding-left: 1px;
+        border-radius: 8px;
+      }
+      input[type="text"]:focus{
+        border-width: $focusBorderWidth;
+      }
+
+      //Input type search
+      input[type='search']{
+        border-color: $highlightColor;
+        width: 80vh;
+      }
+      input[type='search']:focus{
+        border-color: $highlightColor;
+        box-shadow: 0 0 0 0;
+        border-width: $focusBorderWidth;
+      }
+      textarea{
+        resize: vertical;
+        overflow: auto;
+        border-radius: 8px;
+        border: 1px solid $highlightColor;
+      }
+
+      textarea:focus{
+        border-width: $focusBorderWidth;
+        outline-color: transparent;
+      }
+      //input type file
+
+      .inputFileWrapper{
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        input[type="file"]{
+          font-size: 100px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          opacity: 0;
+          margin-bottom: 10px;
+          padding-left: 1px;
+        }
+      }
+
+      .inputFileWrapper:hover{
+        cursor: pointer;
+        .button-container{
+          float: left;
+          #work{
+            -webkit-animation: ani 1s steps(22) forwards;
+            animation: ani 1s steps(22) forwards;
+          }
+        }
+      }
+
+      input[type='email']:focus{
+        border-width: $focusBorderWidth;
+      }
+
+      input[type=password]:focus{
+        border-width: $focusBorderWidth;
+      }
+      //Input Types end
+      //Errors Start
+
+      #error{
+        color: red;
+        background: rgba(255,100,23,0.1);
+        border-style: $barBorderStyle;
+        border-color: $primaryColor;
+        text-align: center;
+      }
+
+      .needLogin{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .innerNeedLogin{
+          display: inline-block;
+          text-align: center;
+          a{
+            display: flex;
+            justify-content: center;
+            .button-container{
+              float: none;
+            }
+          }
+        }
+
+      }
+      //Errors end
+      //Progress-bar Start
+      .progressBarContainer{
+        border: 1px solid black;
+        width: 100%;
+        height: 2vh;
+        .progressBar{
+          background-color: $highlightColor;
+          background: $highlightColor;
+          height: 100%;
+        }
+      }
+
+      // Progress-bar end
+
+
+
+      @media (max-width: 453px) {
+        .mainComponent{
+          padding-top: 20vh;
+        }
+        .sidebar{
+          padding-top: 10vh;
+        }
+      }
+
+    }
 
 
   }
-
-  @media (max-width: 425px) {
-    .mainComponent{
-      padding-top: 83.5px + $textPadding + $logoHeight;
-    }
-  }
-
-}
-}
 
 }

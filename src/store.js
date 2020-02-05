@@ -11,7 +11,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    idToken: null,
+    idToken: 0,
     userId: null,
     username: null,
     email: null,
@@ -21,7 +21,10 @@ export const store = new Vuex.Store({
     errorMessage: null,
     menuExpanded: false,
     articles: [],
-    addArticleOnMainPage: false
+    addArticleOnMainPage: false,
+    sideNavExpanded: false,
+    SNCategories: [],
+    superSNCategory: '',
   },
   //############################################################################
   mutations: {
@@ -33,26 +36,31 @@ export const store = new Vuex.Store({
       state.username = userData.username
       state.isAdmin = userData.isAdmin
     },
-    closeNav(){
-      document.getElementById("sidebar").style.width = "0";
-      document.getElementById("mainComponent").style.paddingLeft = "20px";
-      document.getElementById("navbarTop").style.paddingLeft = "0";
-      this.expandedNav = false;
+    closeNav(state){
+      if(state.sideNavExpanded == true){
+        document.getElementById("sidebar").style.width = "0";
+        //document.getElementById("mainComponent").style.paddingLeft = "20px";
+        state.sideNavExpanded = false
+      }
+      /* eslint-disable no-console */
+      console.log(state.sideNavExpanded)
     },
-    openNav(){
+    openNav(state){
+      if(state.sideNavExpanded == false){
+        var x = window.matchMedia("(max-width: 992px)");
+        if (x.matches) {
+          document.getElementById("sidebar").style.width = "100%";
+          document.getElementById("sidebar").style.marginTop = "78px";
+        } else {
+          var margin = "20.5%";
+          //var padding = "22.5%";
+          document.getElementById("sidebar").style.width = margin;
+          //document.getElementById("mainComponent").style.paddingLeft = padding;
 
-      var x = window.matchMedia("(max-width: 992px)");
-      if (x.matches) {
-        document.getElementById("sidebar").style.width = "100%";
-        document.getElementById("sidebar").style.marginTop = "78px";
-        document.getElementById("navbarTop").style.transition = "0.5s";
-        document.getElementById("navbarTop").style.paddingLeft = "105%";
-      } else {
-        var margin = "20.5%";
-        var padding = "22.5%";
-        document.getElementById("sidebar").style.width = margin;
-        document.getElementById("mainComponent").style.paddingLeft = padding;
-
+        }
+        state.sideNavExpanded = true
+        /* eslint-disable no-console */
+        console.log(state.sideNavExpanded)
       }
     },
     setCategories(state, catData){
@@ -70,8 +78,12 @@ export const store = new Vuex.Store({
       }
     },
     setArticles(state, articles){
+      console.log("article" + articles.brand + articles.name),
       state.articles.push({name: articles.name, brand: articles.brand, description: articles.description, articleImageURL: articles.articleImageURL})
-    }
+    },
+    setSNCategories(state, catData){
+      state.SNCategories.push({categoryName: catData.category})
+    },
   },
   //############################################################################
   actions: {
@@ -187,7 +199,7 @@ createCategory({dispatch, state}, dbData){
 },
 //-------------------------- Get Category from Realtime Database of firebase
 getCategories({commit, state}){
-    while(state.categories.length > 0) {state.categories.pop()}
+  while(state.categories.length > 0) {state.categories.pop()}
   axios.get('/category' + state.superCategory + '.json' + '?auth=' + state.idToken)
   .then(res => {
     /* eslint-disable no-console */
@@ -231,8 +243,10 @@ getCategoriesKey({state, dispatch}, superCat){
   })
 },
 getArticles({commit, state}){
+  /* eslint-disable no-console */
+  console.log("supSNCAT: " + state.superSNCategory)
   while(state.articles.length > 0) {state.articles.pop()}
-  axios.get("/category" + state.superCategory +'/article.json')
+  axios.get("/category" + state.superSNCategory +'/article.json')
   .then(res => {
     /* eslint-disable no-console */
     console.log("GET METHOD:" + res)
@@ -242,7 +256,7 @@ getArticles({commit, state}){
       var productImage = firebase.storage().ref(article.imageLocation)
       productImage.getDownloadURL().then(function(url) {
         /* eslint-disable no-console */
-        console.log(article.article),
+        console.log("article" + article.brand + article.name),
         commit('setArticles', {
           name: article.name,
           brand: article.brand,
@@ -285,7 +299,52 @@ getMainArticles({commit, state}){
     this.error = error,
     console.log(error)
   })
-}
+},
+getSNCategories({dispatch, commit, state}){
+  while(state.SNCategories.length > 0) {state.SNCategories.pop()}
+  axios.get('/category' + state.superSNCategory + '.json')
+  .then(res => {
+    /* eslint-disable no-console */
+    console.log("GET METHOD:" + res)
+    const data = res.data
+    for (let key in data){
+      const category = data[key]
+      /* eslint-disable no-console */
+      console.log(category.category),
+      commit('setSNCategories', {
+        category: category.category
+      })
+    }
+    dispatch("getArticles")
+  })
+
+  .catch(error => {
+    this.error = error,
+    console.log(error)
+  })
+},
+getSNCategoriesKey({state, dispatch}, superCat){
+  axios.get('/category' + state.superSNCategory + '.json')
+  .then(res => {
+    /* eslint-disable no-console */
+    console.log("GET METHOD:" + res)
+    const data = res.data
+    for (let key in data){
+      const categories = data[key]
+      //console.log("Key: " + key)
+
+      if(categories.category == superCat.subCategoryOf){
+        state.superSNCategory = state.superSNCategory + '/' + key
+        while(state.categories.length > 0) {state.categories.pop()}
+        dispatch("getSNCategories")
+      }
+    }
+  })
+  .catch(error => {
+    this.error = error,
+    console.log(error)
+  })
+},
 },
 //############################################################################
 getters: {

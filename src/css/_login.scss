@@ -9,16 +9,21 @@
 
   input[type='text']{
     width:100%;
-    margin-bottom: 10px;
-    padding-left: 1px;
   }
+
 
   input[type='password']{
     @extend input[type='text'];
+  }
+  input[type='password']:focus{
+    border-width: $focusBorderWidth;
   }
 
   input[type='email']{
     @extend input[type='text'];
   }
-  
+  input[type='email']:focus{
+    border-width: $focusBorderWidth;
+  }
+
 }

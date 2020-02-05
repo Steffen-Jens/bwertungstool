@@ -1,26 +1,42 @@
 .sidebar {
-  padding-top: 0;
-  height: 100%;
-  z-index: 1;
+  //padding-top: 10vh;
+  height: 90vh;
+  z-index: 3;
   width: 0;
-  margin-top:86.6px;
-  position: fixed;
-  top: 0;
+  overflow-y: hidden;
+  position: absolute;
+  //top: 0;
   left: 0;
   overflow-x: hidden;
   transition: $sidenavTransition;
   background-color: $primaryColor;
   border-right-style: $barBorderStyle;
-  border-right-color: $borderColor;
+  border-right-color: $highlightColor;
 
+  top: 10vh;
+
+
+  .SNHeader{
+    background-color: $navBackgroundColor;
+    height: 10vh;
+
+    h4{
+      color: $navColor;
+    }
+  }
 
   .sidebar-content{
     margin-left: $contentMargin;
+    height: 80vh;
+    overflow-y: scroll;
     .sidenav-search{
       .searchfield{
         width: 80%;
 
       }
+    }
+    .label{
+      padding-bottom: 0;
     }
   }
 
@@ -30,7 +46,10 @@
 
   .close-btn {
     float: right;
+    top: 0;
   }
 
 
+
 }
+/* Shrinking the sidebar from 250px to 80px and center aligining its content*/

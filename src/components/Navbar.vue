@@ -1,98 +1,70 @@
 <template>
-  <header>
-    <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="#" @click="newContent='appHome'; setNewContent()"><img class="logo" src="../assets/logo.png"></a>
-      <!-- Navbar brand-->
-      <div>
-      <button title="Search" type="button" class="navbar-toggler icnbtn nav-button openbtn"
-      @click="openNav(); ">
-      <i class="fas fa-search icon"><span class="nav-span">Search</span></i>
+  <nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg">
+    <button class="mn-button navbar-toggler" type="button" @click="openNav">
+      <i class="fas fa-bars icon"></i>
+      <span> Categories</span>
     </button>
-    <button class="navbar-toggler nav-button icnbtn" type="button" data-toggle="collapse"
-    data-target="#navbarTop"
-    aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" @click="closeNav()">
-    <i class="fas fa-caret-square-down icon"><span class="nav-span">Menu</span></i>
-  </button>
-</div>
-  <div class="collapse navbar-collapse" id="navbarTop">
-    <ul class="navbar-nav">
-      <li class="nav-item search-list">
-        <form class="nav-search">
-          <button title="Categories" type="button" class="icnbtn nav-button openbtn"
-          @click="openNav()">
-          <i class="fas fa-bars icon"></i>
-        </button>
-        <input class="searchfield" type="search" placeholder="Search"
-        aria-label="Search">
-        <button class="icnbtn searchbutton nav-button" type="button"><i
-          class="fas fa-search icon"></i>
-        </button>
+    <router-link to="/" class="hdeNavItem2 logo" @click="newContent='appHome'; setNewContent()"><img class="logo" src="../assets/logo.png"></router-link>
+    <button class="mn-button navbar-toggler" type="button" data-toggle="collapse" data-target="#navElements" aria-controls="navElements" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-ellipsis-h icon"></i>
+      <span> Menu</span>
+    </button>
+    <div class="collapse navbar-collapse" id="navElements">
+      <ul class="nav nav-pills navbar-nav mr-auto mt-2 mt-lg-0">
+        <li>
+          <form class="form-inline my-2 my-lg-0">
+            <button class="mn-button hdeNavItem" type="button" @click="openNav">
+              <i class="fas fa-bars icon"></i>
+            </button>
+          </form>
+        </li>
+
+        <router-link to="/" tag="li" class="navbar-brand hdeNavItem logo" @click="newContent='appHome'; setNewContent()"><img class="logo" src="../assets/logo.png"></router-link>
+
+
+        <router-link to="/" tag="li" active-class="active" exact class="nav-link"><a>Home</a></router-link>
+
+
+        <router-link to="/addProduct" tag="li" active-class="active" class="nav-link"><a>Add Article</a></router-link>
+
+
+        <router-link v-if="this.$store.state.isAdmin == true" to="/addCategory" tag="li" active-class="active" exact class="nav-link"><a>Add Category</a></router-link>
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0 hdeNavItem">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search">
+        <button class="mn-button" type="submit"><i class="fas fa-search icon"></i></button>
       </form>
-    </li>
-  </ul>
-  <div class="nav-right">
-    <ul class="navbar-nav">
-      <li class="nav-item button-list">
-        <a class="nav-link" title="Add item" href="#" @click="loadAddArticle()">
-          <i class="fas fa-plus icon"><span class="nav-span navbar-toggler">Add item</span></i>
-        </a>
-      </li>
-      <li class="nav-item button-list" v-if="this.$store.state.userId!=null">
-        <a class="nav-link" title="Profile" @click="newContent='appLogin'; setNewContent()" href="#">
-          <i class="fas fa-user icon"><span class="nav-span navbar-toggler">Profile</span></i>
-        </a>
-      </li>
-      <li class="nav-item button-list" v-if="this.$store.state.userId==null">
-        <a class="nav-link" title="Login" @click="newContent='appLogin'; setNewContent()" href="#">
-          <i class="fas fa-sign-in-alt icon"><span class="nav-span navbar-toggler">Login</span></i>
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
-</nav>
-</header>
+      <ul class="nav nav-pills navbar-nav my-2 my-lg-0">
+
+        <router-link to="/login" tag="li" active-class="active" exact class="nav-link"><a>Login</a></router-link>
+
+      </ul>
+    </div>
+  </nav>
 </template>
+
+
 <script>
+
 export default {
 
   data: function(){
     return {
       newContent: '',
-      addArticlePage: "appAddArticle"
+      addArticlePage: "appAddArticle",
+      sas: "/login"
 
     }
   },
 
   methods: {
-    setNewContent(){
-      this.$emit('changeMC', this.newContent);
-    },
-    loadAddArticle(){
-      if(this.$store.state.userId != null){
-        this.newContent = "appAddArticle";
-        this.setNewContent();
-      }else{
-        if (confirm("You have to be signed in to add articles.")) {
-          this.newContent = "appLogin";
-          this.setNewContent();
-        }
-      }
-    },
-    loadProfile(){
-      if(this.$store.state.userId != null){
-        this.loginPage = "appProfile";
-      }else{
-        this.newContent = "appLogin";
-      }
-    },
     openNav(){
       this.$store.commit('openNav')
     },
     closeNav(){
       this.$store.commit('closeNav')
     }
-
   }
 }
 </script>

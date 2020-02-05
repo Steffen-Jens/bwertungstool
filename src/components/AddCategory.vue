@@ -1,12 +1,14 @@
 <template>
   <div class="addCat">
+    <br>
+    <div v-if="this.$store.state.isAdmin == true">
     <form class="login-form" id="login-form">
       <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-3 addCatF1">
           <h4>Add category</h4>
           Location of the new category: <p>{{path}}</p>
-          Name of the new category: <input id="category" type="text" name="category" v-model="category">
+          Name of the new category: <input id="category" @keyup.enter="submitCategory()" type="text" name="category" v-model="category">
           <br><br>
         </div>
         <div class="col-sm-7 addCatF2">
@@ -44,10 +46,20 @@
         </div>
         <div class="col-sm-1"></div>
       </div>
-
-
     </form>
   </div>
+  <div class="needLogin" v-if="this.$store.state.isAdmin != true">
+      <div class="innerNeedLogin">
+        <h4>You have to be signed in as an admin to add categories.</h4>
+        <router-link to="/login">
+          <div class="button-container">
+            <span class="mas">Log in</span>
+            <button id='work' type="button" name="Hover">Log in</button>
+          </div>
+        </router-link>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>

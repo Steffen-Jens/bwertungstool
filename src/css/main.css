@@ -10,179 +10,272 @@ html {
       html body .mob-hide {
         display: none; } }
     html body #app {
+      /*.navbar {
+      z-index: 1;
+      top: 0;
+      position: fixed;
+      width: 100%;
+      background: $primaryColor;
+      border-bottom-width: $barBorderWidth;
+      border-bottom-style: $barBorderStyle;
+      border-bottom-color: $borderColor;
+      border-top-color: $highlightColor;
+      border-top-style: $barBorderStyle;
+      border-top-width: $barBorderWidth;
+      
+      
+      
+      
+      .navbar-brand {
+      .logo {
+      height: $logoHeight;
+      }
+      }
+      
+      
+      
+      .categ{
+      float: right;
+      }
+      
+      .nav-search {
       height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      }
+      
+      .navbar-nav {
+      margin-right: 0px;
+      width: 100%-$contentMargin;
+      
+      
+      
+      .search-list {
+      width: 100%;
+      
+      .nav-search {
+      width: 100%;
+      
+      .searchfield {
+      width: 74%;
+      }
+      .searchfield:focus {
+      outline-color: $highlightColor;
+      }
+      }
+      }
+      
+      }
+      
+      @media (min-width: $mediaMinWidth) {
+      .nav-right {
+      float: right;
+      padding-right: 0px;
+      
+      .nav-link:hover {
+      .icon:before {
+      transition: $sidenavTransition;
+      color: $highlightColor;
+      }
+      }
+      }
+      .sbExp{
+      display: none;
+      }
+      }
+      
+      @media(max-width: $mediaMaxWidth) {
+      .navbar-nav {
+      
+      .search-list{
+      display: none;
+      }
+      
+      .fa-plus::before {
+      padding-right: 7.8px;
+      }
+      
+      .fa-user::before {
+      padding-right: 7.7px;
+      }
+      
+      .fa-users::before {
+      padding-right: 0px;
+      }
+      }
+      
+      }
+      
+      .nav-span {
+      color: $fontColor;
+      padding-left: 5px;
+      }
+      
+      
+      .button-list {
+      float: right;
+      }
+      
+      
+      
+      }*/
+      /* Shrinking the sidebar from 250px to 80px and center aligining its content*/
       @import url("https://fonts.googleapis.com/css?family=Lato:100,300,400");
       @import url("https://fonts.googleapis.com/css?family=Roboto:100");
-      /*.btn {
-      border-color: $highlightColor;
-      border-width: $barBorderWidth;
-      transition: $hoverTransition;
-    }
-
-    .btn:hover {
-
-    color: white;
-    background-color: $highlightColor;
-    border-color: $borderColor;
-    transition: ease-out $hoverTransition;
-  }*/ }
-      html body #app header .navbar {
-        z-index: 1;
-        top: 0;
-        position: fixed;
-        width: 100%;
-        background: white;
-        border-bottom-width: 2px;
-        border-bottom-style: solid;
-        border-bottom-color: #D3D3D3;
-        border-top-color: #ff7733;
-        border-top-style: solid;
-        border-top-width: 2px; }
-        html body #app header .navbar .navbar-brand .logo {
-          height: 50px; }
-        html body #app header .navbar .categ {
-          float: right; }
-        html body #app header .navbar .nav-search {
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center; }
-        html body #app header .navbar .navbar-nav {
-          margin-right: 0px;
-          width: 98%; }
-          html body #app header .navbar .navbar-nav .search-list {
-            width: 100%; }
-            html body #app header .navbar .navbar-nav .search-list .nav-search {
-              width: 100%; }
-              html body #app header .navbar .navbar-nav .search-list .nav-search .searchfield {
-                width: 74%; }
-              html body #app header .navbar .navbar-nav .search-list .nav-search .searchfield:focus {
-                outline-color: #ff7733; }
-        @media (min-width: 992px) {
-          html body #app header .navbar .nav-right {
-            float: right;
-            padding-right: 0px; }
-            html body #app header .navbar .nav-right .nav-link:hover .icon:before {
-              transition: 0.5s;
-              color: #ff7733; } }
-        @media (max-width: 991px) {
-          html body #app header .navbar .navbar-nav .search-list {
-            display: none; }
-          html body #app header .navbar .navbar-nav .fa-plus::before {
-            padding-right: 7.8px; }
-          html body #app header .navbar .navbar-nav .fa-user::before {
-            padding-right: 7.7px; }
-          html body #app header .navbar .navbar-nav .fa-users::before {
-            padding-right: 0px; } }
-        html body #app header .navbar .nav-span {
-          color: black;
-          padding-left: 5px; }
-        html body #app header .navbar .button-list {
-          float: right; }
+      height: 100%; }
+      html body #app .navbar {
+        border-top: 2px solid #ff7733;
+        border-bottom: 2px solid black; }
+        html body #app .navbar .logo {
+          height: 6vh; }
+        html body #app .navbar .logo:hover {
+          cursor: pointer; }
+        html body #app .navbar #navElements {
+          background-color: #353a40;
+          padding-left: 10px;
+          padding-right: 10px; }
+        html body #app .navbar .nav-pills .nav-link.active {
+          background-color: #41474e; }
+          html body #app .navbar .nav-pills .nav-link.active a {
+            color: #ff7733; }
+        html body #app .navbar .nav-link a {
+          color: #96999d; }
+        html body #app .navbar .nav-link a:hover {
+          text-decoration: none;
+          color: #ff7733;
+          transition: 0.5s; }
+      @media (max-width: 991px) {
+        html body #app .navbar #navElements .hdeNavItem {
+          display: none; } }
+      @media (min-width: 992px) {
+        html body #app .navbar .logo {
+          padding-left: 1vh; }
+        html body #app .navbar .hdeNavItem2 {
+          display: none; } }
+      @media (min-width: 453px) {
+        html body #app .navbar {
+          height: 10vh;
+          padding: 0 0 0 0; } }
+      @media (max-width: 453px) {
+        html body #app .navbar {
+          height: 20vh;
+          padding: 0 0 0 0; } }
       html body #app .sidebar {
-        padding-top: 0;
-        height: 100%;
-        z-index: 1;
+        height: 90vh;
+        z-index: 3;
         width: 0;
-        margin-top: 86.6px;
-        position: fixed;
-        top: 0;
+        overflow-y: hidden;
+        position: absolute;
         left: 0;
         overflow-x: hidden;
         transition: 0.5s;
         background-color: white;
         border-right-style: solid;
-        border-right-color: #D3D3D3; }
+        border-right-color: #ff7733;
+        top: 10vh; }
+        html body #app .sidebar .SNHeader {
+          background-color: #353a40;
+          height: 10vh; }
+          html body #app .sidebar .SNHeader h4 {
+            color: #96999d; }
         html body #app .sidebar .sidebar-content {
-          margin-left: 2%; }
+          margin-left: 2%;
+          height: 80vh;
+          overflow-y: scroll; }
           html body #app .sidebar .sidebar-content .sidenav-search .searchfield {
             width: 80%; }
+          html body #app .sidebar .sidebar-content .label {
+            padding-bottom: 0; }
         html body #app .sidebar .sidebar-button {
           padding-top: 0; }
         html body #app .sidebar .close-btn {
-          float: right; }
-      html body #app .addCat {
-        display: flex; }
-        html body #app .addCat .addCatF1 {
+          float: right;
+          top: 0; }
+      html body #app .mainComponent {
+        background: white;
+        min-height: 100%;
+        height: auto;
+        transition: 0.5s;
+        width: 100%;
+        padding-top: 10vh;
+        padding-left: 20px;
+        padding-right: 20px; }
+        html body #app .mainComponent .addCatF1 {
           border-right: 2px solid #D3D3D3; }
-        html body #app .addCat .addCatF2 .repeat {
-          position: relative; }
-          html body #app .addCat .addCatF2 .repeat:hover > .label {
+        html body #app .mainComponent .repeat {
+          position: relative;
+          min-width: fit-content; }
+          html body #app .mainComponent .repeat:hover > .label {
             color: #ff7733; }
-            html body #app .addCat .addCatF2 .repeat:hover > .label::before {
+            html body #app .mainComponent .repeat:hover > .label::before {
               border: 6px solid rgba(255, 100, 23, 0.7);
               margin-right: 5px; }
-        html body #app .addCat .addCatF2 .radio-btn {
-          position: absolute;
-          opacity: 0;
-          visibility: hidden; }
-          html body #app .addCat .addCatF2 .radio-btn:checked + .label {
-            color: #ff7733; }
-            html body #app .addCat .addCatF2 .radio-btn:checked + .label::before {
-              margin-right: 15px;
-              border: 6px solid #ff7733;
-              background: black; }
-        html body #app .addCat .addCatF2 .label {
-          display: flex;
-          align-items: center;
-          padding: 0.75rem 0;
-          color: black;
-          cursor: pointer;
-          transition: all 0.2s linear; }
-        html body #app .addCat .addCatF2 .label::before {
-          display: inline-block;
-          content: "";
-          height: 1.125rem;
-          width: 1.125rem;
-          margin-right: 15px;
-          border: 2px solid black;
-          border-radius: 50%;
-          transition: all 0.2s linear; }
-        html body #app .addCat .btn {
-          float: right; }
-        html body #app .addCat .label__checkbox {
-          display: none; }
-        html body #app .addCat .label__check {
-          display: inline-block;
-          border-radius: 50%;
-          border: 2px solid black;
-          background: white;
-          vertical-align: middle;
-          margin-right: 20px;
-          width: 1.25rem;
-          height: 1.25rem;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: border .3s ease;
-          transition: 0.2s; }
-          html body #app .addCat .label__check i.icon {
-            opacity: 0.2;
-            color: transparent;
-            transition: opacity .3s .1s ease;
-            -webkit-text-stroke: 3px black; }
-          html body #app .addCat .label__check:hover {
-            border: 5px solid #ff7733; }
-        html body #app .addCat .label__checkbox:checked + .label__text .label__check {
-          animation: check 0.5s cubic-bezier(0.895, 0.03, 0.685, 0.22) forwards;
-          background-color: #ff7733;
-          border-color: #ff7733; }
-          html body #app .addCat .label__checkbox:checked + .label__text .label__check .icon {
-            opacity: 1;
-            transform: scale(0);
-            color: white;
-            -webkit-text-stroke: 0;
-            animation: icon 0.3s cubic-bezier(1, 0.008, 0.565, 1.65) 0.1s 1 forwards; }
-        html body #app .addCat .center {
+        html body #app .mainComponent .button-container {
           float: left; }
-@keyframes icon {
-  from {
-    opacity: 0;
-    transform: scale(0.1); }
-  to {
-    opacity: 1;
-    transform: scale(1); } }
+        html body #app .mainComponent .addArtF1 {
+          border-right: 2px solid #D3D3D3; }
+          html body #app .mainComponent .addArtF1 input[type="text"] {
+            width: 100%; }
+          html body #app .mainComponent .addArtF1 textarea {
+            width: 100%; }
+        html body #app .mainComponent .user-account .login {
+          border-right-color: #D3D3D3;
+          border-right-style: solid;
+          border-right-width: 2px; }
+        html body #app .mainComponent .user-account input[type='text'], html body #app .mainComponent .user-account input[type='password'], html body #app .mainComponent .user-account input[type='email'] {
+          width: 100%; }
+        html body #app .mainComponent .user-account input[type='password']:focus {
+          border-width: 2px; }
+        html body #app .mainComponent .user-account input[type='email']:focus {
+          border-width: 2px; }
+        html body #app .mainComponent .row {
+          width: 100%;
+          margin: 0; }
+        html body #app .mainComponent .card-board {
+          display: flex;
+          justify-content: center; }
+          html body #app .mainComponent .card-board .article-cards {
+            display: inline-block;
+            text-align: center;
+            -webkit-box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.32);
+            -moz-box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.32);
+            box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.32);
+            height: 45vh;
+            min-height: 30vh;
+            margin-left: 5px;
+            margin-top: 5px;
+            overflow-y: scroll;
+            overflow-x: hidden; }
+            html body #app .mainComponent .card-board .article-cards p {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              margin-bottom: 8px;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              /* number of lines to show */ }
+            html body #app .mainComponent .card-board .article-cards h4 {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1; }
+            html body #app .mainComponent .card-board .article-cards h5 {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1; }
+            html body #app .mainComponent .card-board .article-cards img {
+              height: 22.5vh; }
+      html body #app .link:hover {
+        color: #ff7733;
+        font-weight: bold;
+        transition: 0.05s;
+        cursor: pointer;
+        text-align: center; }
       html body #app .button-container {
         position: relative;
         width: fit-content10px;
@@ -190,12 +283,10 @@ html {
         border: 1px solid #ff7733;
         transition: 0.5s;
         letter-spacing: 1px;
+        margin-right: 5px;
         float: right;
-        margin-right: 5px; }
-        html body #app .button-container button {
-          width: fit-content;
-          height: 100%;
-          letter-spacing: 1px;
+        border-radius: 8px; }
+        html body #app .button-container #work {
           background: white;
           -webkit-mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png");
           mask: url("https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png");
@@ -203,13 +294,17 @@ html {
           mask-size: 2300% 100%;
           border: none;
           color: black;
+          width: fit-content;
+          height: 100%;
+          letter-spacing: 1px;
+          border-radius: 8px;
           cursor: pointer;
           -webkit-animation: ani2 1s steps(22) forwards;
           animation: ani2 1s steps(22) forwards; }
-          html body #app .button-container button:hover {
+          html body #app .button-container #work:hover {
             -webkit-animation: ani 1s steps(22) forwards;
             animation: ani 1s steps(22) forwards; }
-        html body #app .button-container button:focus {
+        html body #app .button-container #work:focus {
           outline: 0; }
       html body #app .mas {
         position: absolute;
@@ -219,7 +314,8 @@ html {
         width: 100%;
         height: 100%;
         position: absolute;
-        overflow: hidden; }
+        overflow: hidden;
+        border-radius: 8px; }
       html body #app -webkit-keyframes ani from {
         -webkit-mask-position: 0 0;
         mask-position: 0 0; }
@@ -247,144 +343,174 @@ html {
   to {
     -webkit-mask-position: 0 0;
     mask-position: 0 0; } }
-      html body #app input[type='text'], html body #app .mainComponent .user-account input[type='password'], html body #app .mainComponent .user-account input[type='email'] {
-        width: 100%;
-        outline-color: black; }
-      html body #app input[type='text'], html body #app .mainComponent .user-account input[type='password'], html body #app .mainComponent .user-account input[type='email'] {
+      html body #app .mn-button {
+        background-color: #353a40;
+        border-color: transparent;
+        font-size: 4vh;
+        color: #96999d; }
+      html body #app .mn-button:hover {
+        transition: 0.5s;
+        color: #ff7733; }
+      html body #app .mn-button:active {
         outline-color: #ff7733; }
+      html body #app .mn-button:focus {
+        outline-color: #ff7733;
+        color: #ff7733; }
+      html body #app .repeat {
+        position: relative;
+        min-width: fit-content; }
+        html body #app .repeat:hover > .label {
+          color: #ff7733; }
+          html body #app .repeat:hover > .label::before {
+            border: 6px solid rgba(255, 100, 23, 0.7);
+            margin-right: 5px; }
+      html body #app .radio-btn {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden; }
+        html body #app .radio-btn:checked + .label {
+          color: #ff7733; }
+          html body #app .radio-btn:checked + .label::before {
+            margin-right: 15px;
+            border: 6px solid #ff7733;
+            background: black; }
+      html body #app .label {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 0;
+        color: black;
+        cursor: pointer;
+        transition: all 0.2s linear; }
+      html body #app .label::before {
+        display: inline-block;
+        content: "";
+        height: 1.125rem;
+        width: 1.125rem;
+        margin-right: 15px;
+        border: 2px solid black;
+        border-radius: 50%;
+        transition: all 0.2s linear; }
+      html body #app .label__checkbox {
+        display: none; }
+      html body #app .label__check {
+        display: inline-block;
+        border-radius: 50%;
+        border: 2px solid black;
+        background: white;
+        vertical-align: middle;
+        margin-right: 20px;
+        width: 1.25rem;
+        height: 1.25rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border .3s ease;
+        transition: 0.2s; }
+        html body #app .label__check i.icon {
+          opacity: 0.2;
+          color: transparent;
+          transition: opacity .3s .1s ease;
+          -webkit-text-stroke: 3px black; }
+        html body #app .label__check:hover {
+          border: 5px solid #ff7733;
+          color: white; }
+      html body #app .label__checkbox:checked + .label__text .label__check {
+        animation: check 0.5s cubic-bezier(0.895, 0.03, 0.685, 0.22) forwards;
+        background-color: #ff7733;
+        border-color: #ff7733; }
+        html body #app .label__checkbox:checked + .label__text .label__check .icon {
+          opacity: 1;
+          transform: scale(0);
+          color: black;
+          -webkit-text-stroke: 0;
+          animation: icon 0.3s cubic-bezier(1, 0.008, 0.565, 1.65) 0.1s 1 forwards; }
+      html body #app .checkbox {
+        position: relative;
+        float: left; }
+@keyframes icon {
+  from {
+    opacity: 0;
+    transform: scale(0.1); }
+  to {
+    opacity: 1;
+    transform: scale(1); } }
+      html body #app input[type='text'], html body #app .mainComponent .user-account input[type='password'], html body #app .mainComponent .user-account input[type='email'] {
+        outline-color: transparent;
+        border: 1px solid #ff7733;
+        margin-bottom: 10px;
+        padding-left: 1px;
+        border-radius: 8px; }
+      html body #app input[type="text"]:focus {
+        border-width: 2px; }
+      html body #app input[type='search'] {
+        border-color: #ff7733;
+        width: 80vh; }
+      html body #app input[type='search']:focus {
+        border-color: #ff7733;
+        box-shadow: 0 0 0 0;
+        border-width: 2px; }
+      html body #app textarea {
+        resize: vertical;
+        overflow: auto;
+        border-radius: 8px;
+        border: 1px solid #ff7733; }
+      html body #app textarea:focus {
+        border-width: 2px;
+        outline-color: transparent; }
+      html body #app .inputFileWrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block; }
+        html body #app .inputFileWrapper input[type="file"] {
+          font-size: 100px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          opacity: 0;
+          margin-bottom: 10px;
+          padding-left: 1px; }
+      html body #app .inputFileWrapper:hover {
+        cursor: pointer; }
+        html body #app .inputFileWrapper:hover .button-container {
+          float: left; }
+          html body #app .inputFileWrapper:hover .button-container #work {
+            -webkit-animation: ani 1s steps(22) forwards;
+            animation: ani 1s steps(22) forwards; }
+      html body #app input[type='email']:focus {
+        border-width: 2px; }
+      html body #app input[type=password]:focus {
+        border-width: 2px; }
       html body #app #error {
         color: red;
         background: rgba(255, 100, 23, 0.1);
         border-style: solid;
         border-color: white;
         text-align: center; }
-      html body #app #preview {
+      html body #app .needLogin {
+        width: 100%;
         display: flex;
-        align-items: center; }
-      html body #app #preview img {
-        max-width: 100%;
-        max-height: 500px; }
-      html body #app .btn {
-        text-align: center;
-        width: auto;
-        cursor: pointer;
-        padding-top: 5px;
-        margin-right: 5px; }
-        html body #app .btn span {
+        justify-content: center; }
+        html body #app .needLogin .innerNeedLogin {
           display: inline-block;
-          vertical-align: middle; }
-      html body #app .btn-animation {
-        color: black;
-        transition: all 0.7s;
-        position: relative;
-        align-items: center; }
-      html body #app .btn-animation::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
+          text-align: center; }
+          html body #app .needLogin .innerNeedLogin a {
+            display: flex;
+            justify-content: center; }
+            html body #app .needLogin .innerNeedLogin a .button-container {
+              float: none; }
+      html body #app .progressBarContainer {
+        border: 1px solid black;
         width: 100%;
-        height: 100%;
-        z-index: 0;
-        background-color: rgba(255, 100, 23, 0.01);
-        border: 1px solid #ff6417;
-        transition: all 0.7s; }
-      html body #app .btn-animation:hover::before {
-        opacity: 0;
-        transform: scale(0.5, 0.5); }
-      html body #app .btn-animation::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        opacity: 0;
-        transition: all 0.7s;
-        background-color: rgba(255, 100, 23, 0.1);
-        border: 2px solid rgba(255, 100, 23, 0.7);
-        transform: scale(1.2, 1.2); }
-      html body #app .btn-animation:hover::after {
-        opacity: 1;
-        transform: scale(1, 1); }
-      html body #app .icnbtn {
-        border: none;
-        background-color: transparent;
-        outline: none; }
-      html body #app .icnbtn:focus {
-        box-shadow: none; }
-      html body #app .icon::before {
-        color: black; }
-      html body #app .adm-button {
-        display: none; }
-      html body #app .icnbtn:hover .icon:before {
-        transition: 0.7s;
-        color: #ff7733; }
-      html body #app .mainComponent {
-        background: white;
-        min-height: 100%;
-        height: auto;
-        transition: 0.5s;
-        width: 100%;
-        padding-top: 103.5px;
-        padding-left: 20px;
-        padding-right: 20px; }
-        html body #app .mainComponent .MC-Main {
-          height: 100%;
-          display: flex;
-          justify-content: center; }
-          html body #app .mainComponent .MC-Main h1 {
-            color: #ff7733; }
-          html body #app .mainComponent .MC-Main .welcome-logo {
-            margin-left: 15px; }
-        html body #app .mainComponent .row {
-          width: 100%;
-          margin: 0; }
-        html body #app .mainComponent .card-board {
-          display: flex;
-          justify-content: center; }
-          html body #app .mainComponent .card-board .article-cards {
-            display: inline-block;
-            text-align: center;
-            -webkit-box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.32);
-            -moz-box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.32);
-            box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.32);
-            height: 45vh;
-            margin-left: 5px;
-            margin-top: 5px; }
-            html body #app .mainComponent .card-board .article-cards p {
-              overflow: hidden;
-              text-overflow: ellipsis;
-              margin-bottom: 8px;
-              display: -webkit-box;
-              -webkit-box-orient: vertical;
-              -webkit-line-clamp: 2;
-              /* number of lines to show */ }
-            html body #app .mainComponent .card-board .article-cards h4 {
-              overflow: hidden;
-              text-overflow: ellipsis;
-              display: -webkit-box;
-              -webkit-box-orient: vertical;
-              -webkit-line-clamp: 1; }
-            html body #app .mainComponent .card-board .article-cards h5 {
-              overflow: hidden;
-              text-overflow: ellipsis;
-              display: -webkit-box;
-              -webkit-box-orient: vertical;
-              -webkit-line-clamp: 1; }
-            html body #app .mainComponent .card-board .article-cards img {
-              height: 22.5vh; }
-        html body #app .mainComponent .user-account .login {
-          border-right-color: #D3D3D3;
-          border-right-style: solid;
-          border-right-width: 2px; }
-        html body #app .mainComponent .user-account input[type='text'], html body #app .mainComponent .user-account input[type='password'], html body #app .mainComponent .user-account input[type='email'] {
-          width: 100%;
-          margin-bottom: 10px;
-          padding-left: 1px; }
-      @media (max-width: 425px) {
+        height: 2vh; }
+        html body #app .progressBarContainer .progressBar {
+          background-color: #ff7733;
+          background: #ff7733;
+          height: 100%; }
+      @media (max-width: 453px) {
         html body #app .mainComponent {
-          padding-top: 153.5px; } }
+          padding-top: 20vh; }
+        html body #app .sidebar {
+          padding-top: 10vh; } }
 
 /*# sourceMappingURL=main.css.map */

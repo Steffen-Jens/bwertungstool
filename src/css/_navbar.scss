@@ -1,105 +1,178 @@
-.navbar {
-  z-index: 1;
-  top: 0;
-  position: fixed;
-  width: 100%;
-  background: $primaryColor;
-  border-bottom-width: $barBorderWidth;
-  border-bottom-style: $barBorderStyle;
-  border-bottom-color: $borderColor;
-  border-top-color: $highlightColor;
-  border-top-style: $barBorderStyle;
-  border-top-width: $barBorderWidth;
+/*.navbar {
+z-index: 1;
+top: 0;
+position: fixed;
+width: 100%;
+background: $primaryColor;
+border-bottom-width: $barBorderWidth;
+border-bottom-style: $barBorderStyle;
+border-bottom-color: $borderColor;
+border-top-color: $highlightColor;
+border-top-style: $barBorderStyle;
+border-top-width: $barBorderWidth;
 
 
 
 
-  .navbar-brand {
-    .logo {
-      height: $logoHeight;
+.navbar-brand {
+.logo {
+height: $logoHeight;
+}
+}
+
+
+
+.categ{
+float: right;
+}
+
+.nav-search {
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+
+}
+
+.navbar-nav {
+margin-right: 0px;
+width: 100%-$contentMargin;
+
+
+
+.search-list {
+width: 100%;
+
+.nav-search {
+width: 100%;
+
+.searchfield {
+width: 74%;
+}
+.searchfield:focus {
+outline-color: $highlightColor;
+}
+}
+}
+
+}
+
+@media (min-width: $mediaMinWidth) {
+.nav-right {
+float: right;
+padding-right: 0px;
+
+.nav-link:hover {
+.icon:before {
+transition: $sidenavTransition;
+color: $highlightColor;
+}
+}
+}
+.sbExp{
+display: none;
+}
+}
+
+@media(max-width: $mediaMaxWidth) {
+.navbar-nav {
+
+.search-list{
+display: none;
+}
+
+.fa-plus::before {
+padding-right: 7.8px;
+}
+
+.fa-user::before {
+padding-right: 7.7px;
+}
+
+.fa-users::before {
+padding-right: 0px;
+}
+}
+
+}
+
+.nav-span {
+color: $fontColor;
+padding-left: 5px;
+}
+
+
+.button-list {
+float: right;
+}
+
+
+
+}*/
+
+.navbar{
+  border-top: $barBorderWidth $barBorderStyle $highlightColor;
+  border-bottom: $barBorderWidth $barBorderStyle black;
+  .logo{
+    height: 6vh;
+  }
+.logo:hover{
+  cursor: pointer;
+}
+    #navElements{
+    background-color: #353a40;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .nav-pills .nav-link.active{
+    a{
+      color: $highlightColor;
+    }
+    background-color: $lightNavColor;
+  }
+  .nav-link{
+    a{
+      color: $navColor;
+    }
+    a:hover{
+      text-decoration: none;
+      color: $highlightColor;
+      transition: $hoverTransition;
     }
   }
-
-  .categ{
-    float: right;
-  }
-
-  .nav-search {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-  }
-
-  .navbar-nav {
-    margin-right: 0px;
-    width: 100%-$contentMargin;
+}
 
 
-
-    .search-list {
-      width: 100%;
-
-      .nav-search {
-        width: 100%;
-
-        .searchfield {
-          width: 74%;
-        }
-        .searchfield:focus {
-          outline-color: $highlightColor;
-        }
-      }
-    }
-
-  }
-
-  @media (min-width: $mediaMinWidth) {
-    .nav-right {
-      float: right;
-      padding-right: 0px;
-
-      .nav-link:hover {
-        .icon:before {
-          transition: $sidenavTransition;
-          color: $highlightColor;
-        }
-      }
-    }
-  }
-
-  @media(max-width: $mediaMaxWidth) {
-    .navbar-nav {
-
-      .search-list{
+@media(max-width: $mediaMaxWidth) {
+  .navbar{
+    #navElements{
+      .hdeNavItem{
         display: none;
-      }
 
-      .fa-plus::before {
-        padding-right: 7.8px;
-      }
-
-      .fa-user::before {
-        padding-right: 7.7px;
-      }
-
-      .fa-users::before {
-        padding-right: 0px;
       }
     }
   }
-
-  .nav-span {
-    color: $fontColor;
-    padding-left: 5px;
+}
+@media(min-width: $mediaMinWidth) {
+  .navbar{
+    .logo{
+      padding-left: 1vh;
+    }
+    .hdeNavItem2{
+      display: none;
+    }
   }
+}
 
-
-  .button-list {
-    float: right;
+@media(min-width: 453px) {
+  .navbar{
+  height: 10vh;
+  padding: 0 0 0 0;
   }
-
-
-
+}
+@media(max-width: 453px) {
+  .navbar{
+  height: 20vh;
+  padding: 0 0 0 0;
+  }
 }

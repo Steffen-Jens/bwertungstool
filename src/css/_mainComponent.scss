@@ -1,0 +1,60 @@
+.mainComponent {
+  @import "addCat";
+  @import "addArt";
+  @import "login";
+
+  background: $primaryColor;
+  min-height: 100%;
+  height: auto;
+  transition: $sidenavTransition;
+  width: 100%;
+  padding-top: 10vh;
+  padding-left: $textPadding;
+  padding-right: $textPadding;
+  .row{
+    width: 100%;
+    margin: 0;
+  }
+  .card-board{
+    display: flex;
+    justify-content: center;
+    .article-cards{
+      display: inline-block;
+      text-align: center;
+      -webkit-box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.32);
+      -moz-box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.32);
+      box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.32);
+      height: 45vh;
+      min-height: 30vh;
+      margin-left: 5px;
+      margin-top: 5px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2; /* number of lines to show */
+      }
+      h4{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+      }
+      h5{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+      }
+      img{
+        height: 22.5vh;
+      }
+    }
+  }
+}
