@@ -4,7 +4,7 @@ html {
   html body {
     margin: 0 0 0 0;
     color: black;
-    background: #d3d3d3;
+    background-color: #353a40;
     height: 100%; }
     @media (min-width: 991px) {
       html body .mob-hide {
@@ -164,7 +164,7 @@ html {
           padding: 0 0 0 0; } }
       html body #app .sidebar {
         height: 90vh;
-        z-index: 3;
+        z-index: 5;
         width: 0;
         overflow-y: hidden;
         position: absolute;
@@ -177,12 +177,14 @@ html {
         top: 10vh; }
         html body #app .sidebar .SNHeader {
           background-color: #353a40;
-          height: 10vh; }
+          height: 17vh; }
+          html body #app .sidebar .SNHeader .button-container {
+            float: left; }
           html body #app .sidebar .SNHeader h4 {
             color: #96999d; }
         html body #app .sidebar .sidebar-content {
           margin-left: 2%;
-          height: 80vh;
+          height: 73vh;
           overflow-y: scroll; }
           html body #app .sidebar .sidebar-content .sidenav-search .searchfield {
             width: 80%; }
@@ -193,83 +195,15 @@ html {
         html body #app .sidebar .close-btn {
           float: right;
           top: 0; }
-      html body #app .mainComponent {
-        background: white;
-        min-height: 100%;
-        height: auto;
-        transition: 0.5s;
-        width: 100%;
-        padding-top: 10vh;
-        padding-left: 20px;
-        padding-right: 20px; }
-        html body #app .mainComponent .addCatF1 {
-          border-right: 2px solid #D3D3D3; }
-        html body #app .mainComponent .repeat {
-          position: relative;
-          min-width: fit-content; }
-          html body #app .mainComponent .repeat:hover > .label {
-            color: #ff7733; }
-            html body #app .mainComponent .repeat:hover > .label::before {
-              border: 6px solid rgba(255, 100, 23, 0.7);
-              margin-right: 5px; }
-        html body #app .mainComponent .button-container {
-          float: left; }
-        html body #app .mainComponent .addArtF1 {
-          border-right: 2px solid #D3D3D3; }
-          html body #app .mainComponent .addArtF1 input[type="text"] {
-            width: 100%; }
-          html body #app .mainComponent .addArtF1 textarea {
-            width: 100%; }
-        html body #app .mainComponent .user-account .login {
-          border-right-color: #D3D3D3;
-          border-right-style: solid;
-          border-right-width: 2px; }
-        html body #app .mainComponent .user-account input[type='text'], html body #app .mainComponent .user-account input[type='password'], html body #app .mainComponent .user-account input[type='email'] {
-          width: 100%; }
-        html body #app .mainComponent .user-account input[type='password']:focus {
-          border-width: 2px; }
-        html body #app .mainComponent .user-account input[type='email']:focus {
-          border-width: 2px; }
-        html body #app .mainComponent .row {
-          width: 100%;
-          margin: 0; }
-        html body #app .mainComponent .card-board {
-          display: flex;
-          justify-content: center; }
-          html body #app .mainComponent .card-board .article-cards {
-            display: inline-block;
-            text-align: center;
-            -webkit-box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.32);
-            -moz-box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.32);
-            box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.32);
-            height: 45vh;
-            min-height: 30vh;
-            margin-left: 5px;
-            margin-top: 5px;
-            overflow-y: scroll;
-            overflow-x: hidden; }
-            html body #app .mainComponent .card-board .article-cards p {
-              overflow: hidden;
-              text-overflow: ellipsis;
-              margin-bottom: 8px;
-              display: -webkit-box;
-              -webkit-box-orient: vertical;
-              -webkit-line-clamp: 2;
-              /* number of lines to show */ }
-            html body #app .mainComponent .card-board .article-cards h4 {
-              overflow: hidden;
-              text-overflow: ellipsis;
-              display: -webkit-box;
-              -webkit-box-orient: vertical;
-              -webkit-line-clamp: 1; }
-            html body #app .mainComponent .card-board .article-cards h5 {
-              overflow: hidden;
-              text-overflow: ellipsis;
-              display: -webkit-box;
-              -webkit-box-orient: vertical;
-              -webkit-line-clamp: 1; }
-            html body #app .mainComponent .card-board .article-cards img {
-              height: 22.5vh; }
+      html body #app p {
+        font-size: 3vh; }
+      html body #app h4 {
+        font-size: 4vh; }
+      html body #app h5 {
+        font-size: 3.5vh; }
+      html body #app .highlightedText {
+        color: #ff7733;
+        text-decoration: underline; }
       html body #app .link:hover {
         color: #ff7733;
         font-weight: bold;
@@ -280,7 +214,7 @@ html {
         position: relative;
         width: fit-content10px;
         overflow: hidden;
-        border: 1px solid #ff7733;
+        border: 2px solid #ff7733;
         transition: 0.5s;
         letter-spacing: 1px;
         margin-right: 5px;
@@ -297,13 +231,14 @@ html {
           width: fit-content;
           height: 100%;
           letter-spacing: 1px;
-          border-radius: 8px;
           cursor: pointer;
-          -webkit-animation: ani2 1s steps(22) forwards;
-          animation: ani2 1s steps(22) forwards; }
+          -webkit-animation: ani2 1.4s steps(22) forwards;
+          animation: ani2 1.4s steps(22) forwards;
+          background: #353a40;
+          color: #ff7733; }
           html body #app .button-container #work:hover {
-            -webkit-animation: ani 1s steps(22) forwards;
-            animation: ani 1s steps(22) forwards; }
+            -webkit-animation: ani 1.4s steps(22) forwards;
+            animation: ani 1.4s steps(22) forwards; }
         html body #app .button-container #work:focus {
           outline: 0; }
       html body #app .mas {
@@ -314,8 +249,7 @@ html {
         width: 100%;
         height: 100%;
         position: absolute;
-        overflow: hidden;
-        border-radius: 8px; }
+        overflow: hidden; }
       html body #app -webkit-keyframes ani from {
         -webkit-mask-position: 0 0;
         mask-position: 0 0; }
@@ -362,7 +296,7 @@ html {
         html body #app .repeat:hover > .label {
           color: #ff7733; }
           html body #app .repeat:hover > .label::before {
-            border: 6px solid rgba(255, 100, 23, 0.7);
+            border: 6px solid rgba(255, 100, 23, 0.3);
             margin-right: 5px; }
       html body #app .radio-btn {
         position: absolute;
@@ -390,6 +324,75 @@ html {
         border: 2px solid black;
         border-radius: 50%;
         transition: all 0.2s linear; }
+      html body #app input[type=range] {
+        height: 26px;
+        -webkit-appearance: none;
+        margin: 10px 0;
+        width: 100%; }
+      html body #app input[type=range]:focus {
+        outline: none; }
+      html body #app input[type=range]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 14px;
+        cursor: pointer;
+        animate: 0.2s;
+        background: linear-gradient(90deg, #ed0000 0%, #dce400 50%, #02c700 100%);
+        border-radius: 14px;
+        border: 0px solid #000000; }
+      html body #app input[type=range]::-webkit-slider-thumb {
+        border: 1px solid black;
+        height: 20px;
+        width: 40px;
+        border-radius: 12px;
+        background: #353a40;
+        cursor: pointer;
+        -webkit-appearance: none;
+        margin-top: -3px; }
+      html body #app input[type=range]:focus::-webkit-slider-runnable-track {
+        background: linear-gradient(90deg, #ed0000 0%, #dce400 50%, #02c700 100%); }
+      html body #app input[type=range]::-moz-range-track {
+        width: 100%;
+        height: 14px;
+        cursor: pointer;
+        animate: 0.2s;
+        background: rangeGradient;
+        border-radius: 14px;
+        border: 0px solid #000000; }
+      html body #app input[type=range]::-moz-range-thumb {
+        border: 1px solid black;
+        height: 20px;
+        width: 40px;
+        border-radius: 12px;
+        background: #353a40;
+        cursor: pointer; }
+      html body #app input[type=range]::-ms-track {
+        width: 100%;
+        height: 14px;
+        cursor: pointer;
+        animate: 0.2s;
+        background: transparent;
+        border-color: transparent;
+        color: transparent; }
+      html body #app input[type=range]::-ms-fill-lower {
+        background: linear-gradient(90deg, #ed0000 0%, #dce400 50%, #02c700 100%);
+        border: 0px solid #000000;
+        border-radius: 28px; }
+      html body #app input[type=range]::-ms-fill-upper {
+        background: linear-gradient(90deg, #ed0000 0%, #dce400 50%, #02c700 100%);
+        border: 0px solid #000000;
+        border-radius: 28px; }
+      html body #app input[type=range]::-ms-thumb {
+        margin-top: 1px;
+        border: 1px solid black;
+        height: 20px;
+        width: 40px;
+        border-radius: 12px;
+        background: #353a40;
+        cursor: pointer; }
+      html body #app input[type=range]:focus::-ms-fill-lower {
+        background: linear-gradient(90deg, #ed0000 0%, #dce400 50%, #02c700 100%); }
+      html body #app input[type=range]:focus::-ms-fill-upper {
+        background: linear-gradient(90deg, #ed0000 0%, #dce400 50%, #02c700 100%); }
       html body #app .label__checkbox {
         display: none; }
       html body #app .label__check {
@@ -481,6 +484,19 @@ html {
         border-width: 2px; }
       html body #app input[type=password]:focus {
         border-width: 2px; }
+      html body #app .stupid {
+        width: 100vw;
+        background-color: #353a40;
+        color: #ff7733;
+        text-align: center; }
+        html body #app .stupid h4 {
+          padding-top: 10vh; }
+      html body #app .stupidGif {
+        height: 60vh;
+        background-image: url("../assets/facepalm.gif");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 30%; }
       html body #app #error {
         color: red;
         background: rgba(255, 100, 23, 0.1);
@@ -512,5 +528,131 @@ html {
           padding-top: 20vh; }
         html body #app .sidebar {
           padding-top: 10vh; } }
+      html body #app .mainComponent {
+        background: white;
+        min-height: 100%;
+        height: auto;
+        transition: 0.5s;
+        width: 100%;
+        padding-top: 10vh;
+        padding-left: 20px;
+        padding-right: 20px; }
+        html body #app .mainComponent .addCatF1 {
+          border-right: 2px solid #353a40; }
+        html body #app .mainComponent .repeat {
+          position: relative;
+          min-width: fit-content; }
+          html body #app .mainComponent .repeat:hover > .label {
+            color: #ff7733; }
+            html body #app .mainComponent .repeat:hover > .label::before {
+              border: 6px solid rgba(255, 100, 23, 0.3);
+              margin-right: 5px; }
+        html body #app .mainComponent .button-container {
+          float: left; }
+        html body #app .mainComponent hr {
+          margin-top: 0;
+          margin-bottom: 5px; }
+        html body #app .mainComponent .repeat {
+          text-align: center; }
+        html body #app .mainComponent .addArtF1 {
+          border-right: 2px solid #353a40; }
+          html body #app .mainComponent .addArtF1 input[type="text"] {
+            width: 100%; }
+          html body #app .mainComponent .addArtF1 textarea {
+            width: 100%; }
+        html body #app .mainComponent .user-account .login {
+          border-right-color: #353a40;
+          border-right-style: solid;
+          border-right-width: 2px; }
+        html body #app .mainComponent .user-account input[type='text'], html body #app .mainComponent .user-account input[type='password'], html body #app .mainComponent .user-account input[type='email'] {
+          width: 100%; }
+        html body #app .mainComponent .user-account input[type='password']:focus {
+          border-width: 2px; }
+        html body #app .mainComponent .user-account input[type='email']:focus {
+          border-width: 2px; }
+        html body #app .mainComponent .articleImage {
+          max-width: 100%;
+          height: auto; }
+        html body #app .mainComponent .article-rating {
+          padding-top: 7vh; }
+          html body #app .mainComponent .article-rating .ratingform {
+            text-align: center;
+            padding-top: 1vh; }
+            html body #app .mainComponent .article-rating .ratingform .innerRatingForm {
+              text-align: center; }
+              html body #app .mainComponent .article-rating .ratingform .innerRatingForm .rate-icon {
+                font-size: 8vh;
+                transition: 1s; }
+            html body #app .mainComponent .article-rating .ratingform .rating-description {
+              -webkit-box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              box-sizing: border-box;
+              width: 100%; }
+        html body #app .mainComponent .fa-angry {
+          color: #ed0400; }
+        html body #app .mainComponent .fa-frown {
+          color: #e56600; }
+        html body #app .mainComponent .fa-meh {
+          color: #dddf02; }
+        html body #app .mainComponent .fa-smile {
+          color: #68d500; }
+        html body #app .mainComponent .fa-laugh {
+          color: #13ca00; }
+        html body #app .mainComponent .ratings {
+          border: 1px solid #ff7733;
+          margin-top: 2vh;
+          padding-left: 20px; }
+        html body #app .mainComponent .row {
+          width: 100%;
+          margin: 0; }
+        html body #app .mainComponent .card-board {
+          display: flex;
+          justify-content: center; }
+          html body #app .mainComponent .card-board .article-cards {
+            display: inline-block;
+            text-align: center;
+            height: 43vh;
+            min-height: 30vh;
+            margin-left: 5px;
+            margin-top: 5px;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            -webkit-box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.32);
+            -moz-box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.32);
+            box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.32);
+            padding-top: 2vh;
+            transition: 1.5s; }
+            html body #app .mainComponent .card-board .article-cards .cards {
+              height: 100%;
+              overflow-y: auto; }
+            html body #app .mainComponent .card-board .article-cards p {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              margin-bottom: 8px;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              /* number of lines to show */ }
+            html body #app .mainComponent .card-board .article-cards h4 {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1; }
+            html body #app .mainComponent .card-board .article-cards h5 {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1; }
+            html body #app .mainComponent .card-board .article-cards img {
+              height: 26.5vh;
+              max-width: 32vh; }
+          html body #app .mainComponent .card-board .article-cards:hover {
+            transition: 0.5s;
+            cursor: pointer;
+            -webkit-box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.72);
+            -moz-box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.72);
+            box-shadow: inset 4px 4px 10px 3px rgba(0, 0, 0, 0.72); }
 
 /*# sourceMappingURL=main.css.map */

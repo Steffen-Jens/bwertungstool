@@ -1,0 +1,59 @@
+
+
+.articleImage{
+  max-width: 100%;
+  height: auto;
+}
+
+.article-rating{
+
+  padding-top: 7vh;
+
+  .ratingform{
+    text-align: center;
+    padding-top: 1vh;
+
+    .innerRatingForm{
+      text-align: center;
+
+    .rate-icon{
+      font-size: 8vh;
+      transition: 1s;
+    }
+  }
+
+    .rating-description{
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+
+      width: 100%;
+    }
+
+  }
+
+}
+
+
+
+.fa-angry{
+  color: #ed0400
+}
+.fa-frown{
+  color: #e56600
+}
+.fa-meh{
+  color: #dddf02
+}
+.fa-smile{
+  color: #68d500
+}
+.fa-laugh{
+  color: #13ca00
+}
+
+.ratings{
+  border: 1px solid $highlightColor;
+  margin-top: 2vh;
+  padding-left: $textPadding;
+}

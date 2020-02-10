@@ -2,6 +2,7 @@
   @import "addCat";
   @import "addArt";
   @import "login";
+  @import "article";
 
   background: $primaryColor;
   min-height: 100%;
@@ -21,15 +22,21 @@
     .article-cards{
       display: inline-block;
       text-align: center;
-      -webkit-box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.32);
-      -moz-box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.32);
-      box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.32);
-      height: 45vh;
+      height: 43vh;
       min-height: 30vh;
       margin-left: 5px;
       margin-top: 5px;
-      overflow-y: scroll;
       overflow-x: hidden;
+      overflow-y: hidden;
+      -webkit-box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.32);
+      -moz-box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.32);
+      box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.32);
+      padding-top: 2vh;
+      transition: 1.5s;
+      .cards{
+        height: 100%;
+        overflow-y: auto;
+      }
       p {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -53,8 +60,17 @@
         -webkit-line-clamp: 1;
       }
       img{
-        height: 22.5vh;
+        height: 26.5vh;
+        max-width: 32vh;
       }
+    }
+    .article-cards:hover{
+      transition: 0.5s;
+      cursor: pointer;
+      -webkit-box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.72);
+      -moz-box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.72);
+      box-shadow: inset 4px 4px 10px 3px rgba(0,0,0,0.72);
+
     }
   }
 }

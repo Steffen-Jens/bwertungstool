@@ -1,25 +1,24 @@
 <template>
   <div class="addCat">
     <br>
-    <div v-if="this.$store.state.isAdmin == true">
+    <div v-if="this.$store.state.isAdmin == true" @submit.prevent>
     <form class="login-form" id="login-form">
       <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-3 addCatF1">
           <h4>Add category</h4>
           Location of the new category: <p>{{path}}</p>
-          Name of the new category: <input id="category" @keyup.enter="submitCategory()" type="text" name="category" v-model="category">
+          Name of the new category: <input id="category" @keyup.enter="submitCategory()" type="text" v-model="category">
           <br><br>
         </div>
         <div class="col-sm-7 addCatF2">
+          <br>
           <div class="row">
-            <div class="col-sm-3 repeat" v-for="cat in categories" v-bind:key="cat.id">
-              <input type="radio" v-if="cat.categoryName" class="radio-btn" name="choice" v-bind:id="cat.categoryName" v-model="subCategoryOf" v-bind:value="cat.categoryName"/>
-              <label v-bind:for="cat.categoryName" v-if="cat.categoryName" class="label">{{cat.categoryName}}</label>
-
-
-              <!--  <input  type="radio" name="subCategoryOf" v-if="cat.categoryName != null" v-model="subCategoryOf" v-bind:value="cat.categoryName">{{ cat.categoryName }}<br> -->
+            <div class="col-sm-4 repeat" v-for="cat in categories" v-bind:key="cat.id">
+              <hr>
+              <a class="link" @click="subCategoryOf=cat.categoryName; submitSuperCategory()" v-bind:for="cat.categoryName" v-if="cat.categoryName" v-bind:id="cat.categoryName"  v-bind:value="cat.categoryName">{{cat.categoryName}}</a>
             </div>
+            <hr>
           </div>
         </div>
         <div class="col-sm-1"></div>
@@ -33,10 +32,6 @@
           </div>
         </div>
         <div class="col-sm-7">
-          <div class="button-container">
-            <span class="mas">Submit</span>
-            <button id='work' type="button" name="Hover" @click="submitSuperCategory()">Submit root category</button>
-          </div>
           <div class="button-container">
             <span class="mas">Reset</span>
             <button id='work' type="button" name="Hover" @click="resetSuperCategory()">Reset root category</button>

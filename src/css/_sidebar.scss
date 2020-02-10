@@ -1,7 +1,7 @@
 .sidebar {
   //padding-top: 10vh;
   height: 90vh;
-  z-index: 3;
+  z-index: 5;
   width: 0;
   overflow-y: hidden;
   position: absolute;
@@ -17,9 +17,13 @@
 
 
   .SNHeader{
-    background-color: $navBackgroundColor;
-    height: 10vh;
 
+    background-color: $navBackgroundColor;
+    height: 17vh;
+
+    .button-container{
+      float: left;
+    }
     h4{
       color: $navColor;
     }
@@ -27,7 +31,7 @@
 
   .sidebar-content{
     margin-left: $contentMargin;
-    height: 80vh;
+    height: 73vh;
     overflow-y: scroll;
     .sidenav-search{
       .searchfield{

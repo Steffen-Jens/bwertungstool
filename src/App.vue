@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <appNavbar :mainComponent="mainComponent" @changeMC="mainComponent=$event"/>
+    <appSidebar :mainComponent="mainComponent" @changeMC="mainComponent=$event"/>
     <!--<component id="mainComponent" class="mainComponent" :is="mainComponent"></component>-->
     <router-view id="mainComponent" class="mainComponent" v-on:click.native="closeNav()"></router-view>
-    <appSidebar :mainComponent="mainComponent" @changeMC="mainComponent=$event"/>
+
 
   </div>
 </template>

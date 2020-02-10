@@ -21,10 +21,14 @@ export const store = new Vuex.Store({
     errorMessage: null,
     menuExpanded: false,
     articles: [],
-    addArticleOnMainPage: false,
+    exactArticles: [],
+    promotedArticle: false,
     sideNavExpanded: false,
     SNCategories: [],
     superSNCategory: '',
+    rep: 0,
+    searchString: "",
+    prevRoute: ""
   },
   //############################################################################
   mutations: {
@@ -50,11 +54,11 @@ export const store = new Vuex.Store({
         var x = window.matchMedia("(max-width: 992px)");
         if (x.matches) {
           document.getElementById("sidebar").style.width = "100%";
-          document.getElementById("sidebar").style.marginTop = "78px";
         } else {
           var margin = "20.5%";
           //var padding = "22.5%";
           document.getElementById("sidebar").style.width = margin;
+          document.getElementById("sidebar").style.position = "fixed";
           //document.getElementById("mainComponent").style.paddingLeft = padding;
 
         }
@@ -78,12 +82,17 @@ export const store = new Vuex.Store({
       }
     },
     setArticles(state, articles){
-      console.log("article" + articles.brand + articles.name),
-      state.articles.push({name: articles.name, brand: articles.brand, description: articles.description, articleImageURL: articles.articleImageURL})
+      state.articles.push({name: articles.name, brand: articles.brand, description: articles.description, articleImageURL: articles.articleImageURL, articleURL: articles.articleURL})
+      state.articles.sort(() => Math.random() - 0.5);
+    },
+    setExactArticles(state, articles){
+      state.exactArticles.push({name: articles.name, brand: articles.brand, description: articles.description, articleImageURL: articles.articleImageURL, articleURL: articles.articleURL})
+      state.exactArticles.sort(() => Math.random() - 0.5);
     },
     setSNCategories(state, catData){
       state.SNCategories.push({categoryName: catData.category})
     },
+
   },
   //############################################################################
   actions: {
@@ -147,7 +156,7 @@ export const store = new Vuex.Store({
       axios.get('/users.json' + '?auth=' + res.data.idToken)
       .then(res => {
         /* eslint-disable no-console */
-        console.log("GET METHOD:" + res)
+
         const data = res.data
         for (let key in data){
           const user = data[key]
@@ -185,7 +194,7 @@ export const store = new Vuex.Store({
 },
 //-------------------------- Save new Category in Realtime Database of firebase
 createCategory({dispatch, state}, dbData){
-  axios.post("/category" + state.superCategory + ".json" + '?auth=' + state.idToken, {category: dbData.category})
+  axios.post("/category" + state.superCategory + ".json" + '?auth=' + state.idToken, {categoryName: dbData.category})
   .then(res => {
     /* eslint-disable no-console */
     console.log(res)
@@ -203,14 +212,14 @@ getCategories({commit, state}){
   axios.get('/category' + state.superCategory + '.json' + '?auth=' + state.idToken)
   .then(res => {
     /* eslint-disable no-console */
-    console.log("GET METHOD:" + res)
+
     const data = res.data
     for (let key in data){
       const category = data[key]
       /* eslint-disable no-console */
-      console.log(category.category),
+      console.log(category.categoryName),
       commit('setCategories', {
-        category: category.category
+        category: category.categoryName
       })
     }
   })
@@ -225,12 +234,12 @@ getCategoriesKey({state, dispatch}, superCat){
   axios.get('/category' + state.superCategory + '.json' + '?auth=' + state.idToken)
   .then(res => {
     /* eslint-disable no-console */
-    console.log("GET METHOD:" + res)
+
     const data = res.data
     for (let key in data){
       const categories = data[key]
       //console.log("Key: " + key)
-      if(categories.category == superCat.subCategoryOf){
+      if(categories.categoryName == superCat.subCategoryOf){
         state.superCategory = state.superCategory + '/' + key
         while(state.categories.length > 0) {state.categories.pop()}
         dispatch("getCategories")
@@ -242,14 +251,13 @@ getCategoriesKey({state, dispatch}, superCat){
     console.log(error)
   })
 },
-getArticles({commit, state}){
+getArticles({commit, state}, subCat){
   /* eslint-disable no-console */
-  console.log("supSNCAT: " + state.superSNCategory)
-  while(state.articles.length > 0) {state.articles.pop()}
-  axios.get("/category" + state.superSNCategory +'/article.json')
+  console.log("Get Articles from: " + state.superSNCategory + subCat.path)
+  axios.get("/category" + state.superSNCategory + subCat.path +'/article.json')
   .then(res => {
     /* eslint-disable no-console */
-    console.log("GET METHOD:" + res)
+
     const data = res.data
     for (let key in data){
       const article = data[key]
@@ -261,8 +269,55 @@ getArticles({commit, state}){
           name: article.name,
           brand: article.brand,
           description: article.description,
-          articleImageURL: url
+          articleImageURL: url,
+          articleURL: "/category" + state.superSNCategory + subCat.path +'/article/' + key
         })
+      })
+    }
+  })
+
+  .catch(error => {
+    this.error = error,
+    console.log(error)
+  })
+},
+getAllArticles({commit, state}, subCat){
+  /* eslint-disable no-console */
+  console.log("Get Articles from: " + subCat.path)
+  axios.get("/category" + subCat.path +'/article.json')
+  .then(res => {
+    /* eslint-disable no-console */
+
+    const data = res.data
+    for (let key in data){
+      const article = data[key]
+      var productImage = firebase.storage().ref(article.imageLocation)
+      productImage.getDownloadURL().then(function(url) {
+        /* eslint-disable no-console */
+        console.log("ARTICLE TO CHECK: " + article.name)
+        console.log("ARTICLE MATCHES " + state.searchString + ": " + article.name.includes(state.searchString))
+        if(article.brand.toUpperCase().includes(state.searchString.toUpperCase()) == true && state.prevRoute != "/" || article.name.toUpperCase().includes(state.searchString.toUpperCase()) == true && state.prevRoute != "/" || article.description.toUpperCase().includes(state.searchString.toUpperCase()) == true && state.prevRoute != "/"){
+          commit('setExactArticles', {
+            name: article.name,
+            brand: article.brand,
+            description: article.description,
+            articleImageURL: url,
+            articleURL: "/category" + subCat.path +'/article/' + key
+          })
+        }else{
+        state.searchString.split(" ").forEach( function(searchWord){
+          if(article.brand.toUpperCase().includes(searchWord.toUpperCase()) == true || article.name.toUpperCase().includes(searchWord.toUpperCase()) == true || article.description.toUpperCase().includes(searchWord.toUpperCase()) == true){
+            console.log("ARTICLE TO ADD: " + article.brand + article.name),
+            commit('setArticles', {
+              name: article.name,
+              brand: article.brand,
+              description: article.description,
+              articleImageURL: url,
+              articleURL: "/category" + subCat.path +'/article/' + key
+            })
+          }
+        })
+      }
       })
     }
   })
@@ -277,7 +332,7 @@ getMainArticles({commit, state}){
   axios.get("/mainPage/article" + '.json')
   .then(res => {
     /* eslint-disable no-console */
-    console.log("GET METHOD:" + res)
+
     const data = res.data
     for (let key in data){
       const article = data[key]
@@ -289,7 +344,8 @@ getMainArticles({commit, state}){
           name: article.name,
           brand: article.brand,
           description: article.description,
-          articleImageURL: url
+          articleImageURL: url,
+          articleURL: "/mainPage/article/" + key
         })
       })
     }
@@ -305,17 +361,17 @@ getSNCategories({dispatch, commit, state}){
   axios.get('/category' + state.superSNCategory + '.json')
   .then(res => {
     /* eslint-disable no-console */
-    console.log("GET METHOD:" + res)
+
     const data = res.data
     for (let key in data){
       const category = data[key]
       /* eslint-disable no-console */
-      console.log(category.category),
+      console.log(category.categoryName),
       commit('setSNCategories', {
-        category: category.category
+        category: category.categoryName
       })
     }
-    dispatch("getArticles")
+    dispatch("getArticles", {path: ""})
   })
 
   .catch(error => {
@@ -324,19 +380,80 @@ getSNCategories({dispatch, commit, state}){
   })
 },
 getSNCategoriesKey({state, dispatch}, superCat){
-  axios.get('/category' + state.superSNCategory + '.json')
+  axios.get('/category' + state.superSNCategory + superCat.path + '.json')
   .then(res => {
     /* eslint-disable no-console */
-    console.log("GET METHOD:" + res)
+    while(state.articles.length > 0) {state.articles.pop()}
     const data = res.data
     for (let key in data){
       const categories = data[key]
       //console.log("Key: " + key)
-
-      if(categories.category == superCat.subCategoryOf){
+      if(categories.categoryName == superCat.subCategoryOf){
         state.superSNCategory = state.superSNCategory + '/' + key
         while(state.categories.length > 0) {state.categories.pop()}
         dispatch("getSNCategories")
+      }
+    }
+    dispatch("getChildArticles", {subCategoryOf: superCat.subCategoryOf, path: ""})
+  })
+  .catch(error => {
+    this.error = error,
+    console.log(error)
+  })
+},
+getChildArticles({state, dispatch}, superCat){
+  axios.get('/category' + state.superSNCategory + superCat.path + '.json')
+  .then(res => {
+    /* eslint-disable no-console */
+
+    const data = res.data
+    for (let key in data){
+      state.rep++
+      console.log(state.rep)
+      if (key.startsWith("-")) {
+
+
+        const categories = data[key]
+        //console.log("Key: " + key)
+        console.log("Category article value in: " + categories.categoryName + " is: " + categories.article)
+        console.log("Key is: " + key)
+        console.log("Parent is: " + state.superSNCategory)
+        var newPath = superCat.path + "/" + key
+        console.log("New Path is: " + newPath)
+        if(categories.article != "undefined"){
+          dispatch("getArticles", {path: newPath})
+        }
+        dispatch("getChildArticles", {subCategoryOf: superCat.subCategoryOf, path: newPath})
+      }
+    }
+  })
+  .catch(error => {
+    this.error = error,
+    console.log(error)
+  })
+},
+getAllCategories({state, dispatch}, superCat){
+  axios.get('/category' + superCat.path + '.json')
+  .then(res => {
+    /* eslint-disable no-console */
+
+    const data = res.data
+    for (let key in data){
+      state.rep++
+      console.log(state.rep)
+      if (key.startsWith("-")) {
+        const categories = data[key]
+        //console.log("Key: " + key)
+        console.log("Category article value in: " + categories.categoryName + " is: " + categories.article)
+        console.log("Key is: " + key)
+        var newPath = superCat.path + "/" + key
+        console.log("New Path is: " + newPath)
+        if(categories.article != "undefined"){
+          dispatch("getAllArticles", {path: newPath})
+          console.log("Category will be searched: " + newPath)
+
+        }
+        dispatch("getAllCategories", {path: newPath})
       }
     }
   })

@@ -6,7 +6,7 @@ import ChooseCategory from './components/AddArticle/ChooseCategory.vue';
 import AddArticleInformation from './components/AddArticle/AddArticleInformation.vue';
 import Category from './components/Category.vue';
 import Article from './components/Article.vue';
-
+import Ooops from './components/Stupid.vue';
 
 export const routes = [
   {path: '/', component: Home},
@@ -16,7 +16,7 @@ export const routes = [
     {path: 'addArticleInformation', component: AddArticleInformation}
   ]},
   {path: '/addCategory', component: AddCategory},
-  {path: '/category/:catId', component: Category, children: [
-    {path: ':artId', component: Article}
-  ]}
+  {path: '/category/:catId', component: Category},
+  {path: '/article/:artId', component: Article},
+  {path: '/ooops', component: Ooops}
 ];

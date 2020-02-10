@@ -5,7 +5,7 @@
       <div class="col-sm-1"></div>
       <div class="col-sm-5 addArtF1">
         <h4>Add product</h4>
-        <form method="post" class="form" id="form">
+        <form class="form" id="form" >
           <div class="inputFileWrapper">
             <div class="button-container">
               <span class="mas">Upload an image</span>
@@ -38,15 +38,18 @@
       </div>
       <div class="col-sm-5">
 
-        <h4>Preview</h4>
+        <h4>Preview of the article card</h4>
         <div class="row card-board">
           <div class="row">
 
             <div class="col-sm-8 article-cards">
-              <h4>{{brand}}</h4>
-              <h5>{{name}}</h5>
-              <p>{{description}}</p>
-              <img v-if="picture" :src="picture" />
+              <div class="cards">
+                <h4>{{brand}}</h4>
+                <h5>{{name}}</h5>
+                <div class="image">
+                  <img v-if="picture" :src="picture" />
+                </div>
+              </div>
             </div>
           </div>
         </div></div>
@@ -79,7 +82,8 @@
         uploadValue: 0,
         picture: null,
         imageData: null,
-        imageLocation: null
+        imageLocation: null,
+        addArtErrorMessage: this.$store.state.errorMessage
       }
     },
     methods: {
@@ -89,36 +93,41 @@
         this.picture = URL.createObjectURL(this.imageData);
       },
       uploadArticle(){
+        this.addArtErrorMessage = ""
+        if (this.brand != "" && this.name != "" && this.description != "" && this.imageData != null) {
+          axios.post("/category" + this.$store.state.superCategory + "/article" + ".json" + '?auth=' + this.$store.state.idToken, {brand: this.brand, name: this.name, description: this.description, creator: this.$store.state.userId, promotedArticle: this.$store.state.promotedArticle})
+          .then(res => {
+            /* eslint-disable no-console */
+            console.log(res)
+            this.imageLocation = '/articles' + this.$store.state.superCategory  + res.data.name + `/${this.imageData.name}`
 
-        axios.post("/category" + this.$store.state.superCategory + "/article" + ".json" + '?auth=' + this.$store.state.idToken, {brand: this.brand, name: this.name, description: this.description, creator: this.$store.state.userId})
-        .then(res => {
+            axios.put("/category" + this.$store.state.superCategory + "/article/" + res.data.name + ".json" + "?auth=" + this.$store.state.idToken, {brand: this.brand, name: this.name, description: this.description, creator: this.$store.state.userId, imageLocation: this.imageLocation,  promotedArticle: this.$store.state.promotedArticle})
+            this.$store.state.promotedArticle = false
+            const storageRef=firebase.storage().ref(this.imageLocation).put(this.imageData);
+            storageRef.on(`state_changed`,snapshot=>{
+              this.uploadValue = Math.round((snapshot.bytesTransferred/snapshot.totalBytes)*100);
+              if(this.uploadValue == 100){
+                this.brand = ""
+                this.description = ""
+                this.name = ""
+                this.picture = null;
+              }
+
+            }, error=>{console.log(error.message)}
+          );
+        })
+        .catch(error => {
           /* eslint-disable no-console */
-          console.log(res)
-          this.imageLocation = '/articles' + this.$store.state.superCategory  + res.data.name + `/${this.imageData.name}`
+          console.log(error)
+        })
 
-          axios.put("/category" + this.$store.state.superCategory + "/article/" + res.data.name + ".json" + "?auth=" + this.$store.state.idToken, {brand: this.brand, name: this.name, description: this.description, creator: this.$store.state.userId, imageLocation: this.imageLocation})
-          const storageRef=firebase.storage().ref(this.imageLocation).put(this.imageData);
-          storageRef.on(`state_changed`,snapshot=>{
-          this.uploadValue = Math.round((snapshot.bytesTransferred/snapshot.totalBytes)*100);
-          if(this.uploadValue == 100){
-            this.brand = ""
-            this.description = ""
-            this.name = ""
-            this.picture = null;
-          }
-
-          }, error=>{console.log(error.message)}
-        );
-        if(this.$store.state.addArticleOnMainPage == true){
-          axios.post("/mainPage/article.json?auth=" + this.$store.state.idToken, {brand: this.brand, name: this.name, description: this.description, creator: this.$store.state.userId, imageLocation: this.imageLocation})
+      }else {
+        if (this.imageData == null) {
+          this.addArtErrorMessage = "You have to provide an image."
+        }else{
+          this.addArtErrorMessage = " You have to fill out every field."
         }
-      })
-      .catch(error => {
-        /* eslint-disable no-console */
-        console.log(error)
-      })
-
-
+      }
     }
   }
 }

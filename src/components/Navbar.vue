@@ -32,8 +32,8 @@
 
       </ul>
       <form class="form-inline my-2 my-lg-0 hdeNavItem">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search">
-        <button class="mn-button" type="submit"><i class="fas fa-search icon"></i></button>
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" v-model="searchString">
+        <button class="mn-button" @click="startSearch" type="submit"><i class="fas fa-search icon"></i></button>
       </form>
       <ul class="nav nav-pills navbar-nav my-2 my-lg-0">
 
@@ -53,8 +53,8 @@ export default {
     return {
       newContent: '',
       addArticlePage: "appAddArticle",
-      sas: "/login"
-
+      sas: "/login",
+      searchString: ""
     }
   },
 
@@ -64,6 +64,17 @@ export default {
     },
     closeNav(){
       this.$store.commit('closeNav')
+    },
+    startSearch(){
+      while(this.$store.state.exactArticles.length > 0) {this.$store.state.exactArticles.pop()}
+      while(this.$store.state.articles.length > 0) {this.$store.state.articles.pop()}
+      if (this.searchString == ""){
+        this.$router.push("/ooops")
+      }else{
+        this.$store.state.searchString = this.searchString
+        this.$store.dispatch('getAllCategories', {path: "", returnSecureToken: true})
+        this.$router.push("/category/" + this.searchString)
+      }
     }
   }
 }

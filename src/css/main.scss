@@ -1,15 +1,13 @@
 @import 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300';
 
-$outerColor: #d3d3d3;
 $primaryColor: white;
 $fontColor: black;
-$borderColor: #D3D3D3;
 $contentRadius: 25px 25px 25px 25px;
 $contentMargin: 2%;
 $barBorderStyle: solid;
 $barBorderWidth: 2px;
 $highlightColor: #ff7733;
-$lightHighlightColor: rgba(255,100,23,0.7);
+$lightHighlightColor: rgba(255,100,23,0.3);
 $logoHeight: 50px;
 $sidenavTransition: 0.5s;
 $mediaMaxWidth: 991px;
@@ -20,6 +18,8 @@ $navColor: #96999d;
 $lightNavColor: #41474e;
 $navBackgroundColor: #353a40;
 $focusBorderWidth: 2px;
+$borderColor: $navBackgroundColor;
+$rangeGradient: linear-gradient(90deg, rgba(237,0,0,1) 0%, rgba(220,228,0,1) 50%, rgba(2,199,0,1) 100%);
 
 html {
   height: 100%;
@@ -27,7 +27,7 @@ html {
   body {
     margin: 0 0 0 0;
     color: $fontColor;
-    background: $outerColor;
+    background-color: $navBackgroundColor;
     height: 100%;
 
     @media (min-width: $mediaMaxWidth) {
@@ -39,13 +39,25 @@ html {
     #app{
       @import "navbar";
       @import "sidebar";
-      @import "mainComponent";
+
       @import url('https://fonts.googleapis.com/css?family=Lato:100,300,400');
       @import url('https://fonts.googleapis.com/css?family=Roboto:100');
 
       height: 100%;
 
-
+      p{
+        font-size: 3vh;
+      }
+      h4{
+        font-size: 4vh;
+      }
+      h5{
+        font-size: 3.5vh;
+      }
+      .highlightedText{
+        color: $highlightColor;
+        text-decoration: underline;
+      }
       //Links start
 
       .link:hover{
@@ -78,7 +90,7 @@ html {
         position: relative;
         width: fit-content + 10px;
         overflow: hidden;
-        border: 1px solid $highlightColor;
+        border: 2px solid $highlightColor;
         transition: 0.5s;
         letter-spacing: 1px;
         margin-right: 5px;
@@ -97,14 +109,14 @@ html {
           width: fit-content;
           height: 100%;
           letter-spacing: 1px;
-          border-radius: 8px;
           cursor: pointer;
-          -webkit-animation: ani2 1s steps(22) forwards;
-          animation: ani2 1s steps(22) forwards;
-
+          -webkit-animation: ani2 1.4s steps(22) forwards;
+          animation: ani2 1.4s steps(22) forwards;
+          background: $navBackgroundColor;
+          color: $highlightColor;
           &:hover {
-            -webkit-animation: ani 1s steps(22) forwards;
-            animation: ani 1s steps(22) forwards;
+            -webkit-animation: ani 1.4s steps(22) forwards;
+            animation: ani 1.4s steps(22) forwards;
           }
         }
 
@@ -122,7 +134,6 @@ html {
         height: 100%;
         position: absolute;
         overflow: hidden;
-        border-radius: 8px
       }
 
       -webkit-keyframes ani {
@@ -244,6 +255,92 @@ html {
 
 
       //RadioButtons end
+      //Range start
+
+      input[type=range] {
+  height: 26px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 14px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: $rangeGradient;
+  border-radius: 14px;
+  border: 0px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+  border: 1px solid black;
+  height: 20px;
+  width: 40px;
+  border-radius: 12px;
+  background: $navBackgroundColor;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -3px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: $rangeGradient;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 14px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: rangeGradient;
+  border-radius: 14px;
+  border: 0px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+  border: 1px solid black;
+  height: 20px;
+  width: 40px;
+  border-radius: 12px;
+  background: $navBackgroundColor;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 14px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: $rangeGradient;
+  border: 0px solid #000000;
+  border-radius: 28px;
+}
+input[type=range]::-ms-fill-upper {
+  background: $rangeGradient;
+  border: 0px solid #000000;
+  border-radius: 28px;
+}
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  border: 1px solid black;
+  height: 20px;
+  width: 40px;
+  border-radius: 12px;
+  background: $navBackgroundColor;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: $rangeGradient;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: $rangeGradient;
+}
+
+      //range end
       //Checkbox Start
 
 
@@ -385,6 +482,23 @@ html {
       }
       //Input Types end
       //Errors Start
+      .stupid{
+        width: 100vw;
+        background-color: $navBackgroundColor;
+        color: $highlightColor;
+        text-align: center;
+        h4{
+          padding-top: 10vh;
+        }
+      }
+
+      .stupidGif{
+        height: 60vh;
+        background-image: url("../assets/facepalm.gif");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 30%;
+      }
 
       #error{
         color: red;
@@ -436,7 +550,7 @@ html {
           padding-top: 10vh;
         }
       }
-
+      @import "mainComponent";
     }
 
 

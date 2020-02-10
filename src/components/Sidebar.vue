@@ -8,6 +8,10 @@
             <i class="fas fa-times icon"></i>
           </a>
         </button></h4>
+        <div class="button-container">
+          <span class="mas">Reset</span>
+          <button id='work' type="button" name="Hover" @click="resetSuperCategory">Reset Category</button>
+        </div>
       </div>
       <div class="sidebar-content">
         <div class="repeat" v-for="cat in categories" v-bind:key="cat.id">
@@ -36,10 +40,8 @@
       closeNav() {
         this.$store.commit('closeNav')
       },
-      getCategories(){
-        this.$store.dispatch("getCategories", {subCategoryOf: this.subCategoryOf, returnSecureToken: true})
-      },
       resetSuperCategory(){
+        this.$router.push("/")
         this.path = ""
         this.subCategoryOf = ""
         this.$store.state.superSNCategory = ""
@@ -47,12 +49,14 @@
       },
       submitSuperCategory(){
         /* eslint-disable no-console */
+        while(this.$store.state.exactArticles.length > 0) {this.$store.state.exactArticles.pop()}
         console.log("SUBCATOF: " + this.subCategoryOf)
-        this.$store.dispatch('getSNCategoriesKey', {folder: "/catregory", subCategoryOf: this.subCategoryOf, returnSecureToken: true})
+        this.$store.dispatch('getSNCategoriesKey', {path: "", subCategoryOf: this.subCategoryOf, returnSecureToken: true})
         this.path = this.path + this.subCategoryOf + "/"
         this.subCategoryOf = ""
         console.log(this.categories)
-        this.$router.push("/category/" + this.path.split("/").join("-"))
+        this.$router.push("/category/" + (this.path.split("/").join("-")).split(" ").join("_"))
+        //this.$store.dispatch("getArticles", {path: ""})
       },
     },
 

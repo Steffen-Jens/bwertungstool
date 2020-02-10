@@ -1,7 +1,7 @@
 <template>
   <div class="addArt">
     <br>
-    <div v-if="this.$store.state.userId == null">
+    <div v-if="this.$store.state.userId != null">
 
       <form class="form" id="form">
         <div class="row">
@@ -25,14 +25,13 @@
           <div class="col-sm-7 addArtF2">
             <br>
             <div class="row">
-              <div class="col-sm-3 repeat" v-for="cat in categories" v-bind:key="cat.id">
-                <input type="radio" v-if="cat.categoryName" class="radio-btn" name="choice" v-bind:id="cat.categoryName" v-model="subCategoryOf" v-bind:value="cat.categoryName"/>
-                <label v-bind:for="cat.categoryName" v-if="cat.categoryName" class="label">{{cat.categoryName}}</label>
+                <div class="col-sm-4 repeat" v-for="cat in categories" v-bind:key="cat.id">
+                  <hr>
+                  <a class="link" @click="subCategoryOf=cat.categoryName; submitSuperCategory()" v-bind:for="cat.categoryName" v-if="cat.categoryName" v-bind:id="cat.categoryName"  v-bind:value="cat.categoryName">{{cat.categoryName}}</a>
+                </div>
 
-
-                <!--  <input  type="radio" name="subCategoryOf" v-if="cat.categoryName != null" v-model="subCategoryOf" v-bind:value="cat.categoryName">{{ cat.categoryName }}<br> -->
-              </div>
             </div>
+            <hr>
           </div>
           <div class="col-sm-1"></div>
         </div>
@@ -48,10 +47,6 @@
           </div>
           <div class="col-sm-7">
             <div class="button-container">
-              <span class="mas">Submit</span>
-              <button id='work' type="button" name="Hover" @click="submitSuperCategory()">Submit root category</button>
-            </div>
-            <div class="button-container">
               <span class="mas">Reset</span>
               <button id='work' type="button" name="Hover" @click="resetSuperCategory()">Reset root category</button>
             </div>
@@ -63,13 +58,13 @@
       </form>
     </div>
 
-      <div class="needLogin" v-if="this.$store.state.userId != null">
+      <div class="needLogin" v-if="this.$store.state.userId == null">
         <div class="innerNeedLogin">
           <h4>You have to be signed in to add products.</h4>
           <router-link to="/login">
             <div class="button-container">
-              <span class="mas">Log in</span>
-              <button id='work' type="button" name="Hover">Log in</button>
+              <span class="mas">Sign in</span>
+              <button id='work' type="button" name="Hover">Sign in</button>
             </div>
           </router-link>
         </div>
@@ -88,14 +83,14 @@ export default {
       subCategoryOf: "",
       path: "/",
       categories: this.$store.state.categories,
-      errorMessageF2: "",
+      errorMessageF2: this.$store.state.errorMessage,
       showOnMainpage: false
     }
   },
   methods: {
 
     submitCategory(){
-      this.$store.state.addArticleOnMainPage = this.showOnMainpage
+      this.$store.state.promotedArticle = this.showOnMainpage
     },
     submitSuperCategory(){
       if (this.subCategoryOf != "") {
